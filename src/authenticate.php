@@ -36,8 +36,9 @@
             echo $result;
 			if(mysqli_num_rows($result) == 1)
             {
+                echo "Verification Successful";
                 mysqli_close($conn);
-                header("Location: ./votingbooth.html"); Die();
+                header("Location: votingbooth.html"); Die();
             }else {
                 echo "Condition Not Met\n";
             }

@@ -26,28 +26,18 @@
 				}
 			}
 
-            // TODO: We should move some of this code to a master functions file
-			try {
-				$conn = new PDO("mysql:host=".$servername.";dbname=vote", $username, $password);
-
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				echo "Connected successfully"; 
-			
-			} catch(PDOException $e){
-				echo "Connection failed: " . $e->getMessage();
-			}
-			echo "Test";
-		    $stmt = $conn->prepare("SELECT * FROM Users WHERE FName='".$firstname."' AND LName='".$lastname."' AND SSN='".$ssn."' AND street='".$street."' AND city='".$city."' AND state='".$state."' AND county='".$county."';");
-			echo "Setup Statement";
-			$stmt->execute();
-			echo "Executed";
-			//TODO: Move this to master file and create sessions
-			if ($stmt->rowCount()==1)
-				header("Location: votingbooth.html");
-			echo "Redirected";
-			
-			$conn = null;
-
+			$conn = mysqli_connect("localhost","root","3a5bda92e6bf62dd9b8ed6a42dc7bc7380e116126916ac5c","vote");
+			if(!$conn)
+            {
+                printf("Cannot connect to database");
+            }
+            $result = mysqli_query($conn, "SELECT * FROM Users WHERE FName='".$firstname."' AND LName='".$lastname."' AND SSN='".$ssn."' AND street='".$street."' AND city='".$city."' AND state='".$state."' AND county='".$county."';");
+			if(mysqli_num_rows($result) == 1)
+            {
+                mysqli_close($conn);
+                header("Location: ./votingbooth.html"); Die();
+            }
+            mysqli_close($conn);
 		?>
 	</body>
 

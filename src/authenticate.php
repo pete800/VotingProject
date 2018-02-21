@@ -7,8 +7,9 @@
 		<?php
 		
 			$servername = "localhost";    // can be secured by putting this informatiion in a file below root
-			$username = "username";
-			$password = "password";
+			$username = "root";
+			$password = "3a5bda92e6bf62dd9b8ed6a42dc7bc7380e116126916ac5c";
+			// TODO: Create a proper environment variables in the future so this is not in the code
 			
 			$firstname = $_POST['firstname'];
 			$lastname  = $_POST['lastname'];
@@ -25,7 +26,7 @@
 				}
 			}
 
-
+            // TODO: We should move some of this code to a master functions file
 			try {
 				$conn = new PDO("mysql:host=$servername;dbname=myDB", $username, $password);
 
@@ -36,11 +37,12 @@
 				echo "Connection failed: " . $e->getMessage();
 			}
 			
-		    $stmt = $conn->prepare("SELECT * FROM Users WHERE firstname==$firstname AND lastname==$lastname AND ssn==$ssn AND street==$street AND city==$city AND state==$state AND county==$county");
+		    $stmt = $conn->prepare("SELECT * FROM Users WHERE FName='".$firstname."' AND LName='".$lastname."' AND SSN='".$ssn."' AND street='".$street."' AND city='".$city."' AND state='".$state."' AND county='".$county."';");
 			
 			$stmt->execute();
+			//TODO: Move this to master file and create sessions
 			if ($stmt->rowCount()==1)
-				$auth=true;
+				header("Location: votingbooth.html");
 			
 			
 			$conn = null;

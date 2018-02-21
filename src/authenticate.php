@@ -13,7 +13,7 @@
 			
 			$firstname = $_POST['firstname'];
 			$lastname  = $_POST['lastname'];
-			$ssn       = $_POST['ssn'];
+			$ssn       = "{$_POST['ssn1']}-{$_POST['ssn2']}-{$_POST['ssn3']}";
 			$street    = $_POST['street'];
 			$city      = $_POST['city'];
 			$state     = $_POST['state'];

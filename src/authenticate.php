@@ -33,7 +33,7 @@
             }
             echo "Connection Made \n";
             $result = mysqli_query($conn, "SELECT * FROM Users WHERE FName='".$firstname."' AND LName='".$lastname."' AND SSN='".$ssn."' AND Street='".$street."' AND City='".$city."' AND StateCode='".$state."' AND County='".$county."';");
-            echo $result;
+            echo "After Query\n";
 			if(mysqli_num_rows($result) == 1)
             {
                 echo "Verification Successful";

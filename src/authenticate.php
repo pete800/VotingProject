@@ -37,7 +37,7 @@
 				echo "Connection failed: " . $e->getMessage();
 			}
 			
-		    $stmt = $conn->prepare("SELECT * FROM table WHERE firstname==$firstname AND lastname==$lastname AND ssn==$ssn AND street==$street AND city==$city AND state==$state AND county==$county"); 
+		    $stmt = $conn->prepare("SELECT * FROM Users WHERE firstname==$firstname AND lastname==$lastname AND ssn==$ssn AND street==$street AND city==$city AND state==$state AND county==$county");
 			
 			$stmt->execute();
 			if ($stmt->rowCount()==1)

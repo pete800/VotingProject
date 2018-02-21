@@ -33,7 +33,7 @@
             }
             echo "Connection Made \n";
             $result = mysqli_query($conn, "SELECT * FROM Users WHERE FName='".$firstname."' AND LName='".$lastname."' AND SSN='".$ssn."' AND street='".$street."' AND city='".$city."' AND state='".$state."' AND county='".$county."';");
-            echo "Query\n";
+            echo $result;
 			if(mysqli_num_rows($result) == 1)
             {
                 mysqli_close($conn);

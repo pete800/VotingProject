@@ -6,22 +6,33 @@
 		<h1>2020 Election Authentication</h1>
 		
 		<form action="./authenticate.php" method="post">
+			<label for="firstname">First Name:</label><br>
 			  <input type="text" name="firstname">
 			<br>
+			<label for="lastname">Last Name:</label><br>
 			  <input type="text" name="lastname">
 			<br>
+			<div class="ssn_div">
+				<label for="ssn">Social Security Number (Hyphenated):</label><br>
+				  <input type="numeber" name="ssn1" max="999" min="100">
+				  <input type="numeber" name="ssn2" max="999" min="100">
+				  <input type="numeber" name="ssn3" max="9999" min="1000">
+				<br>
+			</div>
+			
+			<label for="street">Street Address:</label><br>
 			  <input type="text" name="street">
 			<br>
+			<label for="city">City:</label><br>
 			  <input type="text" name="city">
 			<br>
+			<label for="state">State:</label><br>
 			  <input type="text" name="state">
 			<br>
+			<label for="county">County:</label><br>
 			  <input type="text" name="county">
 			<br>
-			<label for="gender">Gender on Birth Certificate:</label><br>
-			  <input type="radio" name="gender" value="male" checked> Male<br>
-			  <input type="radio" name="gender" value="female"> Female<br>
-			  			  
+  
 			<input type="submit" value="Authenticate">
 		</form>
 	</body>

@@ -38,7 +38,7 @@
 			}
 			echo "Test";
 		    $stmt = $conn->prepare("SELECT * FROM Users WHERE FName='".$firstname."' AND LName='".$lastname."' AND SSN='".$ssn."' AND street='".$street."' AND city='".$city."' AND state='".$state."' AND county='".$county."';");
-			
+			echo "Setup Statement";
 			$stmt->execute();
 			echo "Executed";
 			//TODO: Move this to master file and create sessions

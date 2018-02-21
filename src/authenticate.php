@@ -17,8 +17,7 @@
 			$city      = $_POST['city'];
 			$state     = $_POST['state'];
 			$county    = $_POST['county'];
-			$gender    = $_POST['gender'];
-			
+
 			foreach($_POST as $value) {    // securing from injection type attacks
 				if ($value != $gender && isset($value)) {  // and not gender bc gender is not a text field
 					$value = trim($value);

@@ -24,7 +24,7 @@ class Blockchain {
 	//
 	// param llock - a Block obj
 	//
-    addBlock( bblock ) {
+    addBlock( block ) {
 		
         block.previousHash = this.getLatestBlock().hash;    // setting predecessor of new block
         block.hash = block.calculateHash();                         // updating hash since it was modified

@@ -4,13 +4,16 @@ class Blockchain {
 	// Constructor
 	constructor() {
 		this.chain = [this.createGenesisBlock];
+		
+		// pending votes
+		this.pendingVotees = [];
 	}
 	
 	
 	//
 	// create GenesisBlock
 	createGenesisBlock {
-        return new Block(0, "01/01/2017", "Genesis block", "0");
+        return new Block("02/29/2018", "Genesis block", "0");
 	}
 	
 	//

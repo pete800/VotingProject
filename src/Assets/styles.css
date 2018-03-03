@@ -3,4 +3,14 @@ header{
 }
 header h1{
     background-color:green;
+    color:white;
+}
+html{
+    padding:0px;
+    margin:0px;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color:lightgray;
 }

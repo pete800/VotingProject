@@ -13,6 +13,7 @@
             printf("Cannot connect to database");
         }
         $year = date("Y");
+        echo $year;
         $results = mysqli_query($conn,"SELECT * FROM Candidates WHERE YearVote='".$year."'");
         while($row = mysqli_fetch_assoc($results))
         {

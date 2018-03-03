@@ -6,6 +6,7 @@ header h1{
     background-color:green;
     color:white;
     text-align:center;
+    padding:5px;
 }
 body{
     margin: 0px;
@@ -15,10 +16,16 @@ body{
 .content{
     width:70%;
     background-color:white;
+    margin:auto;
 }
 .content h1{
     text-align:center;
 }
 .content label{
     display:inline-block;
+}
+.content form{
+    margin:auto;
+    text-align:center;
+    padding:1em;
 }

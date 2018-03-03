@@ -1,16 +1,10 @@
-<html>
-	<head>
-	<title>Authenticating...</title>
-	</head>
-	<body>
-	
-		<?php
-		
+<?php
+
 			$servername = "localhost";    // can be secured by putting this informatiion in a file below root
 			$username = "root";
 			$password = "3a5bda92e6bf62dd9b8ed6a42dc7bc7380e116126916ac5c";
 			// TODO: Create a proper environment variables in the future so this is not in the code
-			
+
 			$firstname = $_POST['firstname'];
 			$lastname  = $_POST['lastname'];
 			$ssn       = $_POST['ssn'];
@@ -43,7 +37,48 @@
                 echo "Condition Not Met\n";
             }
             mysqli_close($conn);
-		?>
-	</body>
+			?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Voting Authenticator</title>
+		<link rel="stylesheet" type="text/css" href="Assets/styles.css">
+	</head>
+	<body>
 
+		<header>
+			<h1>U.S. Online Voting System</h1>
+		</header>
+		<div class="content">
+			<h2>Please enter all of your information for verification</h2>
+			<form action="./authenticate.php" method="post">
+				<label for="firstname">First Name:</label><br>
+				  <input type="text" name="firstname">
+				<br>
+				<label for="lastname">Last Name:</label><br>
+				  <input type="text" name="lastname">
+				<br>
+				<div class="ssn_div">
+					<label for="ssn">Social Security Number:</label><br>
+					  <input type="numeber" name="ssn">
+					<br>
+				</div>
+
+				<label for="street">Street Address:</label><br>
+				  <input type="text" name="street">
+				<br>
+				<label for="city">City:</label><br>
+				  <input type="text" name="city">
+				<br>
+				<label for="state">State:</label><br>
+				  <input type="text" name="state">
+				<br>
+				<label for="county">County:</label><br>
+				  <input type="text" name="county">
+				<br>
+
+				<input type="submit" value="Authenticate">
+			</form>
+		</div>
+	</body>
 </html>

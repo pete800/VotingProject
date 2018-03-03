@@ -27,10 +27,10 @@
         $result = mysqli_query($conn, "SELECT * FROM Users WHERE FName='" . $firstname . "' AND LName='" . $lastname . "' AND SSN='" . $ssn . "' AND Street='" . $street . "' AND City='" . $city . "' AND StateCode='" . $state . "' AND County='" . $county . "';");
         if (mysqli_num_rows($result) == 1) {
 
-            mysqli_close($conn);
             session_start();
-            $_SESSION['UserID'] = $row['UserID'];
+            $_SESSION['UserID'] = $result['UserID'];
             header("Location: votingbooth.php");
+            mysqli_close($conn);
             Die();
         } else {
             //TODO Toss the user to the error screen here. Unable to authenticate

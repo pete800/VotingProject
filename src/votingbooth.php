@@ -4,7 +4,7 @@
         header("Location: index.html");
         die();
     }
-    if(!empty($_POST)) {
+    if(empty($_POST)) {
         $servername = "localhost";    // can be secured by putting this informatiion in a file below root
         $username = "root";
         $password = "3a5bda92e6bf62dd9b8ed6a42dc7bc7380e116126916ac5c";

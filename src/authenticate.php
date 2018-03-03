@@ -19,22 +19,24 @@
                 $value = strip_tags($value);
             }
         }
-
+        //Create mysql connection
         $conn = mysqli_connect($servername, $username, $password,"vote");
         if (!$conn) {
             printf("Cannot connect to database");
         }
+        //Verify user
         $result = mysqli_query($conn, "SELECT * FROM Users WHERE FName='" . $firstname . "' AND LName='"
             . $lastname . "' AND SSN='" . $ssn . "' AND Street='" . $street . "' AND City='" . $city.
             "' AND StateCode='" . $state . "' AND County='" . $county . "';");
 
         if (mysqli_num_rows($result) == 1) {
+            // User authenticated successfully. Start session and send them to the voting booth page
             session_start();
             $result = mysqli_fetch_assoc($result);
             $_SESSION['UserID'] = $result['UserID'];
             header("Location: votingbooth.php");
             mysqli_close($conn);
-            Die();
+            die();
         } else {
             //TODO Toss the user to the error screen here. Unable to authenticate
         }

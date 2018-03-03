@@ -14,26 +14,26 @@
         $county = $_POST['county'];
 
         foreach ($_POST as $value) {    // securing from injection type attacks
-            if ($value != $gender && isset($value)) {  // and not gender bc gender is not a text field
+            if (isset($value)) {  // and not gender bc gender is not a text field
                 $value = trim($value);
                 $value = strip_tags($value);
             }
         }
 
-        $conn = mysqli_connect("localhost", "root", "3a5bda92e6bf62dd9b8ed6a42dc7bc7380e116126916ac5c", "vote");
+        $conn = mysqli_connect($servername, $username, $password,"vote");
         if (!$conn) {
             printf("Cannot connect to database");
         }
-        echo "Connection Made \n";
         $result = mysqli_query($conn, "SELECT * FROM Users WHERE FName='" . $firstname . "' AND LName='" . $lastname . "' AND SSN='" . $ssn . "' AND Street='" . $street . "' AND City='" . $city . "' AND StateCode='" . $state . "' AND County='" . $county . "';");
-        echo "After Query\n";
         if (mysqli_num_rows($result) == 1) {
-            echo "Verification Successful";
+            $row = mysqli_fetch_assoc($result);
             mysqli_close($conn);
-            header("Location: votingbooth.html");
+            session_start();
+            $_SESSION['uid'] = $row['UserID'];
+            header("Location: votingbooth.php");
             Die();
         } else {
-            echo "Condition Not Met\n";
+            //TODO Toss the user to the error screen here. Unable to authenticate
         }
         mysqli_close($conn);
     }

@@ -29,7 +29,7 @@
             $row = mysqli_fetch_assoc($result);
             mysqli_close($conn);
             session_start();
-            $_SESSION['uid'] = $row['UserID'];
+            $_SESSION['UserID'] = $row['UserID'];
             header("Location: votingbooth.php");
             Die();
         } else {

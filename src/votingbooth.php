@@ -14,7 +14,7 @@
         }
         $year = date("Y");
         $results = mysqli_query($conn,"SELECT * FROM Candidates WHERE YearVote='".$year."'");
-        foreach($row = mysqli_fetch_assoc($results))
+        while($row = mysqli_fetch_assoc($results))
         {
             echo $row['FName'];
         }

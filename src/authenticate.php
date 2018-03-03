@@ -24,7 +24,10 @@
         if (!$conn) {
             printf("Cannot connect to database");
         }
-        $result = mysqli_query($conn, "SELECT * FROM Users WHERE FName='" . $firstname . "' AND LName='" . $lastname . "' AND SSN='" . $ssn . "' AND Street='" . $street . "' AND City='" . $city . "' AND StateCode='" . $state . "' AND County='" . $county . "';");
+        $result = mysqli_query($conn, "SELECT * FROM Users WHERE FName='" . $firstname . "' AND LName='"
+            . $lastname . "' AND SSN='" . $ssn . "' AND Street='" . $street . "' AND City='" . $city.
+            "' AND StateCode='" . $state . "' AND County='" . $county . "';");
+
         if (mysqli_num_rows($result) == 1) {
             session_start();
             $result = mysqli_fetch_assoc($result);

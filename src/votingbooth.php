@@ -1,6 +1,7 @@
 <?PHP
     if(!isset($_SESSION['UserID']) || empty($_SESSION['username'])){
         echo $_SESSION['UserID'];
+        echo "Test";
     }
 ?>
 <!DOCTYPE html>

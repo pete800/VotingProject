@@ -26,7 +26,7 @@
         }
         $result = mysqli_query($conn, "SELECT * FROM Users WHERE FName='" . $firstname . "' AND LName='" . $lastname . "' AND SSN='" . $ssn . "' AND Street='" . $street . "' AND City='" . $city . "' AND StateCode='" . $state . "' AND County='" . $county . "';");
         if (mysqli_num_rows($result) == 1) {
-            $row = mysqli_fetch_assoc($result);
+
             mysqli_close($conn);
             session_start();
             $_SESSION['UserID'] = $row['UserID'];

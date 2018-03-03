@@ -1,16 +1,20 @@
 header{
-
+    position:sticky;
+    position:-webkit-sticky;
 }
 header #h1{
     background-color:green;
     color:white;
+    text-align:center;
 }
 body{
     margin: 0px;
     padding: 0px;
     background-color:lightgray;
 }
-content #h1{
+.content #h1{
     text-align:center;
-
+}
+.content #form{
+    display:inline-block;
 }

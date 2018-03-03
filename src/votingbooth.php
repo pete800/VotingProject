@@ -1,7 +1,6 @@
 <?PHP
-    if(!isset($_SESSION['UserID'])){
-        header("Location: index.html");
-        Die();
+    if(!isset($_SESSION['UserID']) || empty($_SESSION['username'])){
+        echo $_SESSION['UserID'];
     }
 ?>
 <!DOCTYPE html>

@@ -25,6 +25,13 @@ CREATE TABLE Voted(
 
 INSERT INTO Voted VALUES("1","1","0");
 
+CREATE TABLE Parties(
+  PartyID SMALLINT AUTO_INCREMENT PRIMARY KEY,
+  PartyName varchar(30)
+);
+INSERT INTO Parties VALUES("1", "Republican");
+INSERT INTO Parties VALUES("2", "Democrats");
+
 CREATE TABLE Candidates(
   CandidateID int AUTO_INCREMENT PRIMARY KEY,
   FName varchar(30),
@@ -32,15 +39,10 @@ CREATE TABLE Candidates(
   PartyID SMALLINT,
   VPresFName varchar(30),
   VPresLName varchar(30),
-  YearVote varchar(30)
+  YearVote varchar(30),
+  FOREIGN KEY (PartyID) REFERENCES Parties(PartyID)
 );
 
 INSERT INTO Candidates VALUES("1","Donald","Trump","1","Mike","Pence","2018");
 INSERT INTO Candidates VALUES("2","Hillary","Clinton","2","Tim","Kaine","2018");
 
-CREATE TABLE Parties(
-  PartyID SMALLINT AUTO_INCREMENT PRIMARY KEY,
-  PartyName varchar(30)
-);
-INSERT INTO Parties VALUES("1", "Republican");
-INSERT INTO Parties VALUES("2", "Democrats");

@@ -29,10 +29,9 @@
             session_start();
             $result = mysqli_fetch_assoc($result);
             $_SESSION['UserID'] = $result['UserID'];
-            echo $result['UserID'];
-            //header("Location: votingbooth.php");
+            header("Location: votingbooth.php");
             mysqli_close($conn);
-            //Die();
+            Die();
         } else {
             //TODO Toss the user to the error screen here. Unable to authenticate
         }

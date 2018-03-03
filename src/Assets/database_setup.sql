@@ -32,7 +32,7 @@ CREATE TABLE Candidates(
   PartyID SMALLINT,
   VPresFName varchar(30),
   VPresLName varchar(30),
-  YearVote varchar(30),
+  YearVote varchar(30)
 );
 
 INSERT INTO Candidates VALUES("1","Donald","Trump","1","Mike","Pence","2018");

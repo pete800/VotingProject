@@ -15,6 +15,6 @@ body{
 .content #h1{
     text-align:center;
 }
-.content #form{
+.content #label{
     display:inline-block;
 }

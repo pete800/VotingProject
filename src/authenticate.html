@@ -1,8 +1,17 @@
 <html>
 	<head>
 		<title>Voting Authenticator</title>
+		<link rel="stylesheet" type="text/css" href="Assets/styles.css">
 	</head>
 	<body>
+
+		<header>
+			<h1>U.S. Online Voting System</h1>
+			<ul>
+				<li><a href="authenticate.html">Log In</a></li>
+
+			</ul>
+		</header>
 		<h1>2020 Election Authentication</h1>
 		
 		<form action="./authenticate.php" method="post">
@@ -13,7 +22,7 @@
 			  <input type="text" name="lastname">
 			<br>
 			<div class="ssn_div">
-				<label for="ssn">Social Security Number (Hyphenated):</label><br>
+				<label for="ssn">Social Security Number</label><br>
 				  <input type="numeber" name="ssn">
 				<br>
 			</div>

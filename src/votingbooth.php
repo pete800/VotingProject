@@ -21,7 +21,7 @@
     //After the user selects the candidates this is where we would send the info to the blockchain portion of the website
     if(!empty($_POST))
     {
-
+        echo $_POST['pres'];
     }
 ?>
 <!DOCTYPE html>
@@ -37,14 +37,14 @@
         <div class="content">
             <h2>Please select your vote</h2>
             <div>
-                <form class="pres">
+                <form class="pres" action="votingbooth.php" method="post">
                     <h3>Presidential Candidates</h3>
                     <?PHP
                         if(isset($results))
                         {
                             while($row = mysqli_fetch_assoc($results))
                             {
-                                echo "<input type='radio' name='pres' value='Test'>";
+                                echo "<input type='radio' name='pres' value='".$row['candidateID']."'>";
                                 echo "<label for='".$row['FName']."'>".$row['FName']." ".$row['LName']." (".substr($row['PartyName'],0,1).")</label>";
                             }
                         }

@@ -28,6 +28,7 @@
 <html>
 	<head>
 		<title>Voting Booth</title>
+        <link rel="stylesheet" type="text/css" href="Assets/styles.css">
 	</head>
 	<body>
         <header>
@@ -36,7 +37,7 @@
         <content>
             <h1>Please select your vote</h1>
             <div>
-                <form>
+                <form class="pres">
                     <h3>Presidential Candidates</h3>
                 <?PHP
                     if(isset($results))

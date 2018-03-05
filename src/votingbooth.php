@@ -32,23 +32,23 @@
 	</head>
 	<body>
         <header>
-
+            <h1>U.S. Online Voting System</h1>
         </header>
-        <content>
+        <content class="content">
             <h1>Please select your vote</h1>
             <div>
                 <form class="pres">
                     <h3>Presidential Candidates</h3>
-                <?PHP
-                    if(isset($results))
-                    {
-                        while($row = mysqli_fetch_assoc($results))
+                    <?PHP
+                        if(isset($results))
                         {
-                            echo "<input type='radio' name='".$row['FName']."'>";
-                            echo "<label for='".$row['FName']."'>".$row['FName']."</>";
+                            while($row = mysqli_fetch_assoc($results))
+                            {
+                                echo "<input type='radio' name='".$row['FName']."'>";
+                                echo "<label for='".$row['FName']."'>".$row['FName']."</label>";
+                            }
                         }
-                    }
-                ?>
+                    ?>
                 </form>
             </div>
         </content>

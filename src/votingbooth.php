@@ -45,7 +45,7 @@
                             while($row = mysqli_fetch_assoc($results))
                             {
                                 echo "<input type='radio' name='".$row['FName']."'>";
-                                echo "<label for='".$row['FName']."'>".$row['FName']." ".$row['LName']." (".substr($row['Party'],0,1).")</label>";
+                                echo "<label for='".$row['FName']."'>".$row['FName']." ".$row['LName']." (".substr($row['PartyName'],0,1).")</label>";
                             }
                         }
                     ?>

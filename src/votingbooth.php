@@ -43,12 +43,9 @@
                     {
                         while($row = mysqli_fetch_assoc($results))
                         {
-                            if($row['CandidateTypeID'] == 1) {
-                                echo "<input type='radio' name='pres'>";
-                                echo "<p>".$row['FName']."</p>";
-                            }
+                            echo "<input type='radio' name='".$row['FName']."'>";
+                            echo "<label for='".$row['FName']."'>".$row['FName']."</>";
                         }
-
                     }
                 ?>
                 </form>

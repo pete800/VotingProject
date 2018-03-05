@@ -34,6 +34,8 @@
             session_start();
             $result = mysqli_fetch_assoc($result);
             $_SESSION['UserID'] = $result['UserID'];
+            $_SESSION['State'] = $result['State'];
+            $_SESSION['County'] = $result['County'];
             header("Location: votingbooth.php");
             mysqli_close($conn);
             die();

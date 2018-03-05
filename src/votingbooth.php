@@ -34,8 +34,8 @@
         <header>
             <h1>U.S. Online Voting System</h1>
         </header>
-        <content class="content">
-            <h1>Please select your vote</h1>
+        <div class="content">
+            <h2>Please select your vote</h2>
             <div>
                 <form class="pres">
                     <h3>Presidential Candidates</h3>
@@ -51,6 +51,6 @@
                     ?>
                 </form>
             </div>
-        </content>
+        </div>
 	</body>
 </html>

@@ -52,6 +52,7 @@
                             {
                                 echo "<input type='radio' name='pres' value='".$row['candidateID']."'>";
                                 echo "<label for='".$row['FName']."'>".$row['FName']." ".$row['LName']." (".substr($row['PartyName'],0,1).")</label>";
+                                echo "</br>";
                             }
                         }
                     ?>

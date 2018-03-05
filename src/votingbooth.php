@@ -15,7 +15,7 @@
             printf("Cannot connect to database");
         }
         $year = date("Y");
-        $results = mysqli_query($conn,"SELECT * FROM Candidates WHERE YearVote='".$year."'");
+        $results = mysqli_query($conn,"SELECT * FROM Candidates WHERE YearVote='".$year."' LEFT JOIN Parties ON PartyID");
         mysqli_close($conn);
     }
     //After the user selects the candidates this is where we would send the info to the blockchain portion of the website
@@ -45,7 +45,7 @@
                             while($row = mysqli_fetch_assoc($results))
                             {
                                 echo "<input type='radio' name='".$row['FName']."'>";
-                                echo "<label for='".$row['FName']."'>".$row['FName']."</label>";
+                                echo "<label for='".$row['FName']."'>".$row['FName']." ".$row['LName']." (".substr($row['Party'],0,1).")</label>";
                             }
                         }
                     ?>

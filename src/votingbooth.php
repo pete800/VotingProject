@@ -21,7 +21,7 @@
     //After the user selects the candidates this is where we would send the info to the blockchain portion of the website
     if(!empty($_POST))
     {
-        echo $_POST['pres'];
+        echo "Test ". $_POST['pres'];
         //Check to verify that we had a valid vote
         //Then add vote to blockchan system
         //Destroy users session

@@ -1,4 +1,8 @@
 <?PHP
+    $servername = "localhost";
+    $username = "root";
+    $password = "3a5bda92e6bf62dd9b8ed6a42dc7bc7380e116126916ac5c";
+    $conn = mysqli_connect($servername, $username, $password,"vote");
     //Verify that the user is actually verified. Kick them to the home page if they are not
     session_start();
     if(!isset($_SESSION['UserID']) || empty($_SESSION['UserID'])){
@@ -7,22 +11,23 @@
     }
     //Make connection and pull candidates if for the user
     if(empty($_POST)) {
-        $servername = "localhost";
-        $username = "root";
-        $password = "3a5bda92e6bf62dd9b8ed6a42dc7bc7380e116126916ac5c";
-        $conn = mysqli_connect($servername, $username, $password,"vote");
+
         if (!$conn) {
             printf("Cannot connect to database");
         }
         $year = date("Y");
         $results = mysqli_query($conn,"SELECT * FROM Candidates LEFT JOIN Parties ON Candidates.PartyID = Parties.PartyID WHERE YearVote='".$year."'");
-        mysqli_close($conn);
     }
     //After the user selects the candidates this is where we would send the info to the blockchain portion of the website
     if(!empty($_POST))
     {
-        echo $_POST['pres'];
+        //Check to verify that we had a valid vote
+        //Then add vote to blockchan system
+        //Destroy users session
+        //Mark that the user has voted
     }
+    mysqli_close($conn);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,8 +42,9 @@
         <div class="content">
             <h2>Please select your vote</h2>
             <div>
-                <form class="pres" action="votingbooth.php" method="post">
+                <form action="votingbooth.php" method="post">
                     <h3>Presidential Candidates</h3>
+                    <div class="pres">
                     <?PHP
                         if(isset($results))
                         {
@@ -49,6 +55,7 @@
                             }
                         }
                     ?>
+                    </div>
                     <input type="submit" value="Vote">
                 </form>
             </div>

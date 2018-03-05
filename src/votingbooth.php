@@ -30,6 +30,26 @@
 		<title>Voting Booth</title>
 	</head>
 	<body>
+        <header>
 
+        </header>
+        <content>
+            <h1>Please select your vote</h1>
+            <div>
+                <form>
+                    <h3>Presidential Candidates</h3>
+                <?PHP
+                    if(isset($results))
+                    {
+                        while($row = mysqli_fetch_assoc($results))
+                        {
+                            echo "<input type='radio' name='pres' alt='".$row['FName']."'>";
+                        }
+
+                    }
+                ?>
+                </form>
+            </div>
+        </content>
 	</body>
 </html>

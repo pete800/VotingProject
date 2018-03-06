@@ -4,9 +4,10 @@ class Blockchain {
 	// Constructor
 	constructor() {
 		this.chain = [this.createGenesisBlock];
+		this.difficult = 1;    // this is what changes mining difficulrt--direct relationship
 		
 		// pending votes
-		this.pendingVotees = [];
+		this.pendingVotes = [];
 	}
 	
 	
@@ -27,13 +28,9 @@ class Blockchain {
 	//
 	// param llock - a Block obj
 	//
-    addBlock( block ) {
-		
-        block.previousHash = this.getLatestBlock().hash;    // setting predecessor of new block
-        block.hash = block.calculateHash();                         // updating hash since it was modified
-        this.chain.push(block);                                            // add block to this
-		
-    }
+    createVote(vote) {
+		this.pendingVotes.push(vote);
+	}
 	
 	//
 	// validates chain

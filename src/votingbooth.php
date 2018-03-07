@@ -43,7 +43,7 @@
         <div class="content">
             <h2>Please select your vote</h2>
             <div>
-                <form action="votingbooth.php" method="post">
+                <form action="" method="post">
                     <h3>Presidential Candidates</h3>
                     <div class="pres">
                     <?PHP

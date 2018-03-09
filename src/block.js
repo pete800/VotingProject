@@ -2,6 +2,16 @@ const SHA256 = require("crypto-js/sha256");
 
 class Block {
 	
+	/**
+	public index: number;
+	public timestamp: number;
+	public aVotes: number;
+	public bVotes: number;
+	public previousHash: string;
+	public hash: string;
+	public nonce: number;
+	*/
+	
     constructor(timestamp, aVotes, bVotes, previousHash = '') {
 		
         this.previousHash = previousHash;
@@ -44,6 +54,21 @@ class Block {
 
 		// add to chain, since its been mined
 		this.chain.push(block);
+	}
+	
+	
+	//
+	// Is valid structure
+	//    since js isn't type sensitive
+	//
+	isValidBlockStructure() {
+		
+		return typeof this.aVotes === 'number' &&
+			typeof this.hash === 'string' &&
+			typeof this.previousHash === 'string' &&
+			typeof this.aVotes === 'number' &&
+			typeof this.bVotes === 'number';
+		
 	}
 
 }

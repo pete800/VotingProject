@@ -20,7 +20,6 @@ class Block {
 		this.bVotes = bVotes;
         this.hash = this.calculateHash();
 		this.nonce = 0;
-;
     }
 
 	

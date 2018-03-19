@@ -34,7 +34,7 @@
 <html>
 	<head>
 		<title>Voting Booth</title>
-        <link rel="stylesheet" type="text/css" href="Assets/styles.css">
+        <link rel="stylesheet" type="text/css" href="../public/stylesheets/styles.css">
 	</head>
 	<body>
         <header>

@@ -5,7 +5,7 @@ Utilizes blockchain technology
 
 TODO:
 -
-1. Convert voting booth to ejs
+1. ~~Convert voting booth to ejs~~
 2. Create mysql scripts with node
 3. Review mysql
 4. Fix errors in blockchain code

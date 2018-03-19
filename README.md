@@ -16,3 +16,21 @@ TODO:
 9. Create unit tests
 10. Work on creating integration tests
 11. Ensure we are following protocol outlined in slack
+
+
+Blockchain Process:
+-
+Pre: Check server time to see if voting is opened
+One server per time zone. Voting opens at 8 am and closes at 5 pm in each time zone
+1. User enters their verification information
+2. Validate verification information
+3. If authentication is accpeted proceed to voting booth
+4. Pull candidates from mysql and display
+5. User votes
+6. Set user vote for year to true. pass along vote information to blockchain system
+7. Block is created with vote information
+8. Add block to pending votes
+9. Mine as many votes as possible
+10. Update chain with recently mined blocks
+11. Notify other nodes that the chain has been modified
+12. Notify user if their block has been mined that their vote has been counted and give receipt id

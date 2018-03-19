@@ -3,7 +3,7 @@ CREATE DATABASE vote;
 use vote;
 
 CREATE TABLE Users(
-  UserID int AUTO_INCREMENT PRIMARY KEY,4
+  UserID int AUTO_INCREMENT PRIMARY KEY,
   FName varchar(255),
   LName varchar(255),
   SSN int(9),

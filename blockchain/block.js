@@ -1,7 +1,7 @@
 const SHA256 = require("crypto-js/sha256");
 
 class Block {
-	
+
 	/**
 	public index: number;
 	public timestamp: number;
@@ -11,9 +11,9 @@ class Block {
 	public hash: string;
 	public nonce: number;
 	*/
-	
+
     constructor(timestamp, aVotes, bVotes, previousHash = '') {
-		
+
         this.previousHash = previousHash;
         this.timestamp = timestamp;
 		this.aVotes = aVotes;
@@ -22,28 +22,41 @@ class Block {
 		this.nonce = 0;
     }
 
-	
-	//
-	// calcs hash
-	//
-    calculateHash() {
-        return SHA256(this.previousHash + this.timestamp + JSON.stringify(this.aVotes + this.bVotes) + this.nonce).toString();
+
+    get getHash(){
+        return this.hash;
     }
-	
-	//
-	// function to mine a block
-	//
+
+    get getPHash() {
+        return this.previousHash;
+    }
+
+    /**
+     * Calculate the hash of this block
+     */
+    calculateHash() {
+        return SHA256(this.previousHash + this.timestamp
+            + this.aVotes + this.bVotes
+            + this.nonce).toString();
+    }
+
+
+    /**
+     * method to mine a block
+     *
+     * @param difficulty
+     */
 	mineBlock(difficulty) {
-		
+
 		while (this.hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")) {
 			this.nonce++;
 			this.hash = this.calculateHash();
 		}
 		console.log("BLOCK MINED: " + this.hash);
-		
+
 	}
-	
-	
+
+
 	//
 	// mine pending votez
 	minePendingVotes() {
@@ -54,20 +67,21 @@ class Block {
 		// add to chain, since its been mined
 		this.chain.push(block);
 	}
-	
-	
-	//
-	// Is valid structure
-	//    since js isn't type sensitive
-	//
+
+
+    /**
+     * checking structure of block
+     *
+     * @returns {boolean}
+     */
 	isValidBlockStructure() {
-		
+
 		return typeof this.aVotes === 'number' &&
 			typeof this.hash === 'string' &&
 			typeof this.previousHash === 'string' &&
 			typeof this.aVotes === 'number' &&
 			typeof this.bVotes === 'number';
-		
+
 	}
 
 }

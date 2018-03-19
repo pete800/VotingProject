@@ -1,28 +1,75 @@
+
+
 class Blockchain {
-	
-	//
-	// Constructor
-	constructor() {
-		this.chain = [this.createGenesisBlock];
+
+    /**
+     * constructor
+     */
+    constructor() {
+		this.chain = [this.createGenesisBlock()];
+
 		this.difficult = 1;    // this is what changes mining difficulrt--direct relationship
-		
-		// pending votes
+
 		this.pendingVotes = [];
 	}
-	
-	
-	//
-	// create GenesisBlock
-	createGenesisBlock {
-        return new Block("02/29/2018", "Genesis block", "0");
-	}
-	
-	//
-	// get most recent block
+
+
+    /**
+     * Creates the initial block for the blockchain
+     *
+     * @returns {Block}
+     */
+	createGenesisBlock() {
+        return new Block(Date.now(), 0, 0, "");
+    }
+
+
+    /**
+     * get most recent block
+     *
+     * @returns {*}
+     */
     getLatestBlock() {
         return this.chain[this.chain.length - 1];
     }
-	
+
+
+    /**
+     * generates next block in the chain
+     */
+    generateNewBlock() {
+
+        prevBlock = this.getLatestBlock();    // used to get prev hash
+
+        newBlock = new Block(Date.now(), 0, 0, prevBlock.getHash());
+        this.addBlock(newBlock);
+        broadcast();
+        return newBlock;
+    }
+
+
+    /**
+     * determines if new block is valid, and adds to chain if so
+     *
+     * @param newBlock
+     */
+    addBlock(newBlock) {
+        if (this.isValidNewBlock(newBlock))
+            this.chain.push(newBlock);
+    }
+
+
+    /**
+     * returns whether new block is valid
+     *
+     * @param newBlock
+     * @returns {boolean}
+     */
+    isValidNewBlock(newBlock) {
+        return newBlock.getPHash() === this.getLatestBlock().getHash();
+    }
+
+
 	//
 	// add a block to the chain
 	//
@@ -31,43 +78,55 @@ class Blockchain {
     createVote(vote) {
 		this.pendingVotes.push(vote);
 	}
-	
-	//
-	// validates chain
-	//
+
+    /**
+     * Validates entire blockchain
+     *
+     * @returns {boolean}
+     */
     isChainValid() {
-		
+
 		// from oldest to youngest
         for (let i = 1; i < this.chain.length; i++){
-			
+
             const currentBlock = this.chain[i];
             const previousBlock = this.chain[i - 1];
 
             if (currentBlock.hash !== currentBlock.calculateHash()) {    // are contents valid
+                console.log("Invalid Chain: current block's hash is invalid");
                 return false;
             }
 
             if (currentBlock.previousHash !== previousBlock.hash) {    // pointing to correct previous block
+                console.log("Invalid Chain: prev and current hashes don't match");
+                return false;
+            }
+
+            if (currentBlock.isValidBlockStructure()){
+                console.log("Current block's structure is invalid");
                 return false;
             }
         }
         return true;
     }
-	
-	
-	//
-	// Replaying old chain with new chain if it is longer
-	//
+
+
+    /**
+     * Replacing old chain with newly reieved
+     *
+     * @param newBlocks
+     */
 	replaceChain(newBlocks) {
-		
-		if (newBlocks.isValidChain() && newBlocks.length > this.length) {
-			
+
+		if (newBlocks.isChainValid() && newBlocks.length > this.chain.length) {
+
 			console.log('Replacing chain');
-			this = newBlocks;
-			
+			this.chain = newBlocks;
+			broadcast();
+
 		} else {
-			console.log('Invalid chain recieved');
+			console.log('Invalid chain received');
 		}
 	}
-	
+
 }

@@ -49,7 +49,7 @@
 <html>
 	<head>
 		<title>Voting Authenticator</title>
-		<link rel="stylesheet" type="text/css" href="Assets/styles.css">
+		<link rel="stylesheet" type="text/css" href="../public/stylesheets/styles.css">
 	</head>
 	<body>
 

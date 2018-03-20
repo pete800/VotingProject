@@ -1,5 +1,4 @@
 
-
 class Blockchain {
 
     /**
@@ -23,6 +22,12 @@ class Blockchain {
         return new Block(Date.now(), 0, 0, "");
     }
 
+    /**
+     * returns the blockChain
+     */
+    getBlockchain() {
+	    return this.chain;
+    }
 
     /**
      * get most recent block
@@ -118,15 +123,18 @@ class Blockchain {
      */
 	replaceChain(newBlocks) {
 
-		if (newBlocks.isChainValid() && newBlocks.length > this.chain.length) {
+        if (newBlocks.isChainValid() && newBlocks.length > this.chain.length) {
 
-			console.log('Replacing chain');
-			this.chain = newBlocks;
-			broadcast();
+            console.log('Replacing chain');
+            this.chain = newBlocks;
+            broadcast();
 
-		} else {
-			console.log('Invalid chain received');
-		}
-	}
+        } else {
+            console.log('Invalid chain received');
+        }
+    }
 
 }
+
+const blockchain = new Blockchain();
+export {blockchain};

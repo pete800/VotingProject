@@ -4,6 +4,6 @@ module.exports = {
         'user': 'node',
         'password': '17zxQKyLrXGo'
     },
-    'database': 'Vote',
+    'database': 'vote',
     'users_table': 'Users'
 };

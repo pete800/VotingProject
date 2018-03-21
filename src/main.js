@@ -2,6 +2,7 @@
 import * as  bodyParser from 'body-parser';
 import * as express from 'express';
 import {blockchain} from '../blockchain/blockchain';
+import {getSockets} from '../blockchain/networking';
 
 function initHTTPServer(port) {
     
@@ -21,9 +22,12 @@ function initHTTPServer(port) {
     
     /*** list peers ***/
     app.get('/peers', function (req, res) {
-        res.send(getSockets().map(( s: any ) => s._socket.remoteAddress + ':' + s._socket.remotePort));
+        res.send(getSockets().map(( s ) => s._socket.remoteAddress + ':' + s._socket.remotePort));
     });
 
+    /***
+     * add peer to peers
+     */
     app.post('/addPeer', function (req, res) {
         connectToPeers(req.body.peer);
         res.send();

@@ -11,13 +11,16 @@
 <div class="content">
     <h2>Please select your vote</h2>
     <div>
-        <form action="" method="post">
-            <h3>Presidential Candidates</h3>
-            <div class="pres">
-
-            </div>
-            <input type="submit" value="Vote">
-        </form>
+            <form method="post" action="/votingbooth/vote">
+                <h3>Presidential Candidates</h3>
+                <input type="radio" id="pres1" name="pres" value="<%= candidates[0].CandidateID%>">
+                <label for="1"><%= candidates[0].FName + ' ' + candidates[0].LName%></label>
+                <br>
+                <input type="radio" id="pres2" name="pres" value="<%= candidates[1].CandidateID%>">
+                <label for="1"><%= candidates[1].FName + ' ' + candidates[1].LName%></label>
+                <br>
+                <input type="submit" value="Vote">
+            </form>
     </div>
 </div>
 </body>

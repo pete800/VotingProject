@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var authenticate = require('./routes/authenticate');
 var votingbooth = require('./routes/votingbooth');
-
+var processing = require('./routes/processing');
 var app = express();
 
 //Set up mysql
@@ -32,7 +32,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/', index);
 app.use('/authenticate', authenticate);
 app.use('/votingbooth', votingbooth);
-
+app.use('/processing', processing);
 
 
 // catch 404 and forward to error handler

@@ -59,6 +59,7 @@ class Block {
 
 	//
 	// mine pending votez
+
 	minePendingVotes() {
 
     	let block = new Block(Date.now(), this.pendingVotes);

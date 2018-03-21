@@ -21,10 +21,11 @@ router.post('/add', function(req, res){
         if(error) throw error;
         if(results.length === 1) {
             //Authentication successful
-
+            req.authentication_session.user = results[0].UserID;
             res.redirect('/votingbooth/')
         }else{
             //Authentication Unsuccessful
+            req.authentication_session.reset();
         }
     });
     console.log(results);

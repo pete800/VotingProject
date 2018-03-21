@@ -16,12 +16,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 var dbconfig = require('./config/database');
 var connection = mysql.createConnection(dbconfig.connection);
 connection.query('USE ' + dbconfig.database);
-
+var session = require('client-sessions');
 global.db = connection;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+app.use(session({
+    cookieName: 'authentication_session',
+    secret: '3fSSgXgevb60GGE8jGGCJ8OzNWZ76Nc2CybzMzSLH8h1xHo3CXTybWSZFwik4bj6wyMZ5wEAN4ArjopU2FmO1KTtbgdYqmsv6GVk',
+    duration: 5 * 60 * 1000,
+    activeDuration: 5 * 60 * 1000,
+}));
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 

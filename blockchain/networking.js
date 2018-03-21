@@ -40,7 +40,7 @@ function initNetworking(port) {
     });
 
     wss.on('connection', function (ws) {
-        if (!(ws === WebSocket)) {
+        if (ws === WebSocket) {
             initConnection(ws);
             console.log("WebSocket listening on port" + port);
         } else {
@@ -54,7 +54,7 @@ function initConnection(ws) {
 
     sockets.push(ws);
 
-    sendMessage(es, null);
+    sendMessage(ws, null);
 }
 
 /**
@@ -64,6 +64,13 @@ function initConnection(ws) {
  * @param message
  */
 function sendMessage(who, message) {
-    if (!(ws === WebSocket)) who.send(JSON.stringify(message));
+    if (who === WebSocket) who.send(JSON.stringify(message));
 }
-export {getSockets};
+
+/**
+ * send a message to all sockets
+ */
+function broadcast(message) {
+    sockets.forEach(s => sendMessage(s, message));
+}
+export {getSockets, broadcast};

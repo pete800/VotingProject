@@ -15,8 +15,12 @@ router.post('/add', function(req, res){
     var city = req.body.city;
     var state = req.body.state;
     var county = req.body.county;
-
+    db.query("SELECT * FROM Users WHERE `FName`=")
 });
 
+function serialize(data)
+{
+
+}
 
 module.exports = router;

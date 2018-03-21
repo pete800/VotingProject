@@ -51,8 +51,7 @@ CREATE TABLE Candidates(
   County varchar(30),
   YearVote varchar(30),
   CandidateTypeID SMALLINT,
-  FOREIGN KEY (PartyID) REFERENCES Parties(PartyID),
-  FOREIGN KEY (CandidateTypeID) REFERENCES CandidateType(CandidateTypeID)
+  FOREIGN KEY (PartyID) REFERENCES Parties(PartyID)
 );
 
 INSERT INTO Candidates VALUES("1","Donald","Trump","1","NY","NY","2018", "1");

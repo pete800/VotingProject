@@ -9,14 +9,22 @@ var votingbooth = require('./routes/votingbooth');
 
 var app = express();
 
+//Set up mysql
+var mysql = require('mysql');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+var dbconfig = require('./config/database');
+var connection = mysql.createConnection(dbconfig.connection);
+connection.query('USE ' + dbconfig.database);
+
+global.db = connection;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname + '/public'));
@@ -24,6 +32,8 @@ app.use(express.static(__dirname + '/public'));
 app.use('/', index);
 app.use('/authenticate', authenticate);
 app.use('/votingbooth', votingbooth);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

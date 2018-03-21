@@ -1,3 +1,5 @@
+import {broadcast} from './networking';
+
 
 class Blockchain {
 

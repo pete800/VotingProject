@@ -57,12 +57,16 @@ class Blockchain {
 
     /**
      * determines if new block is valid, and adds to chain if so
+     *   returns the success
      *
      * @param newBlock
      */
     addBlock(newBlock) {
-        if (this.isValidNewBlock(newBlock))
+        if (this.isValidNewBlock(newBlock)) {
             this.chain.push(newBlock);
+            return true;
+        }
+        return false;
     }
 
 

@@ -1,5 +1,4 @@
-
-
+import {blockchain} from "./blockchain";
 
 
 const WebSocket = require('ws');
@@ -54,11 +53,87 @@ function initConnection(ws) {
 
     sockets.push(ws);
 
+    initErrorHandler(ws);
     sendMessage(ws, null);
 }
 
+
+/*** creating function for messages ***/
 /**
- * send message to websocket
+ * connect to peers
+ *
+ * @param peer - address
+ */
+function connectToPeers(peer) {
+
+    const ws = new WebSocket(peer);
+    ws.onopen( () => initConnection(ws));
+    ws.onerror( () => console.log("connection failed"));
+}
+
+
+/**
+ * establishing what is to be done if webSocket fails or closes
+ * @param ws
+ */
+function initErrorHandler(ws) {
+
+    ws.onclose( () => closeConn(ws));
+    ws.onerror( () => closeConn(ws));
+
+}
+
+/**
+ * closing connection and printing error, if it fails
+ * @param ws
+ */
+function closeConn(ws) {
+
+    console.log("connection failed:" + ws.url);
+    sockets.splice(sockets.indexOf(ws), 1);
+
+}
+
+
+/**
+ * handling when blockchain is requested
+ * @param receivedBlocks
+ */
+function handleBlockchainResponse(receivedBlocks) {
+
+    /*** checking if empty ***/
+    if (receivedBlocks.length === 0) {
+        console.log("Blockchain is empty");
+        return;
+    }
+
+    /*** validating structure ***/
+    const latestBlockRecieved = receivedBlocks[receivedBlocks.length-1];
+    if (!latestBlockRecieved.isValidBlockStructure()) {
+        console.log("Invalid Block");
+        return;
+    }
+
+    const latestBlock = blockchain.getLatestBlock();
+    /*** is this a new block that agrees with previous chain ***/
+    if ( latestBlockRecieved.getPHash() === latestBlock.getHash()) {
+        /*** if so, lets add it to chain ***/
+        if (blockchain.addBlock(latestBlockRecieved)) {
+            broadcast();
+        }
+    } else if (receivedBlocks.length === 1) {
+        /*** query bc this shouldn't be ***/
+        broadcast();
+    } else {
+        /*** there's > 1 block, so take em all ***/
+        this.replaceChain(receivedBlocks);
+    }
+
+}
+
+
+/**
+ * send message to webSocket
  *
  * @param who
  * @param message
@@ -73,4 +148,6 @@ function sendMessage(who, message) {
 function broadcast(message) {
     sockets.forEach(s => sendMessage(s, message));
 }
-export {getSockets, broadcast};
+
+
+export {initNetworking, connectToPeers, getSockets, broadcast};

@@ -2,8 +2,9 @@
 import * as  bodyParser from 'body-parser';
 import * as express from 'express';
 import {blockchain} from '../blockchain/blockchain';
-import {getSockets} from '../blockchain/networking';
+import {initNetworking, connectToPeers, getSockets} from '../blockchain/networking';
 
+const port = 9999;    // temp
 function initHTTPServer(port) {
     
     const app = express();

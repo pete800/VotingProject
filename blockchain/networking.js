@@ -1,25 +1,12 @@
 import {blockchain} from "./blockchain";
+import {responseLatestMessage, queryAllMessage, queryChainLengthMessage, queryChainLengthMessage} from "./message";
 
 
 const WebSocket = require('ws');
 
 
-const sockets = WebSocket[];
+const sockets = [];
 
-/***
- * defining the types of messages that will be sent
- */
-enum MessageType {
-    QUERY_LATEST = 0;
-    QUERY_ALL = 1;
-    RESPONSE_BLOCKCHAIN = 2;
-}
-
-
-class Message {
-    public type;     // must test to ensure the enum
-    public data;
-}
 
 /**
  * get sockets (peers)
@@ -49,16 +36,23 @@ function initNetworking(port) {
 }
 
 
+/**
+ * initialize the various handlers to watch the connection and add it to the list of peers
+ * @param ws
+ */
 function initConnection(ws) {
 
+    if (sockets !== WebSocket[]) {
+        console.log("sockets is not a WebSocket[]");
+        return;
+    }
     sockets.push(ws);
-
+    initMessageHandler(ws);
     initErrorHandler(ws);
-    sendMessage(ws, null);
+    sendMessage(ws, queryChainLengthMessage());
 }
 
 
-/*** creating function for messages ***/
 /**
  * connect to peers
  *
@@ -78,10 +72,24 @@ function connectToPeers(peer) {
  */
 function initErrorHandler(ws) {
 
+    if (ws !== WebSocket) {
+        console.log("ws is not a WebSocket");
+        return;
+    }
+
     ws.onclose( () => closeConn(ws));
     ws.onerror( () => closeConn(ws));
 
 }
+
+
+/**
+ * initializing the handler to deal all messages from connected peers
+ */
+function initMessageHandler() {
+
+}
+
 
 /**
  * closing connection and printing error, if it fails
@@ -119,11 +127,11 @@ function handleBlockchainResponse(receivedBlocks) {
     if ( latestBlockRecieved.getPHash() === latestBlock.getHash()) {
         /*** if so, lets add it to chain ***/
         if (blockchain.addBlock(latestBlockRecieved)) {
-            broadcast();
+            broadcast(responseLatestMessage());
         }
     } else if (receivedBlocks.length === 1) {
         /*** query bc this shouldn't be ***/
-        broadcast();
+        broadcast(queryAllMessage());
     } else {
         /*** there's > 1 block, so take em all ***/
         this.replaceChain(receivedBlocks);

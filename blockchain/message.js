@@ -64,4 +64,5 @@ function responseLatestMessage() {
         JSON.stringify(blockchain.getLatestBlock()));
 }
 
-export {responseLatestMessage, queryAllMessage, queryChainLengthMessage};
+export {Message, MessageType, responseLatestMessage, queryAllMessage, queryChainLengthMessage,
+ responseBlockchainMessage};

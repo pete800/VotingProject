@@ -1,12 +1,10 @@
 import {blockchain} from "./blockchain";
-import {responseLatestMessage, queryAllMessage, queryChainLengthMessage, queryChainLengthMessage} from "./message";
-
+import {Message, MessageType, responseLatestMessage, queryAllMessage,
+    queryChainLengthMessage, queryChainLengthMessage, responseBlockchainMessage} from "./message";
 
 const WebSocket = require('ws');
 
-
 const sockets = [];
-
 
 /**
  * get sockets (peers)
@@ -19,7 +17,7 @@ function getSockets() {
  * initialize the listening on port
  * @param port
  */
-function initNetworking(port) {
+function initNetworkingServer(port) {
 
     const wss = WebSocket.Server({
         port: port
@@ -30,7 +28,7 @@ function initNetworking(port) {
             initConnection(ws);
             console.log("WebSocket listening on port" + port);
         } else {
-            console.log("Error: ws no recieved in initNetworking");
+            console.log("Error: ws no recieved in initNetworkingServer");
         }
     });
 }
@@ -42,7 +40,7 @@ function initNetworking(port) {
  */
 function initConnection(ws) {
 
-    if (sockets !== WebSocket[]) {
+    if (sockets !== []) {    // can't figure out how to check array type
         console.log("sockets is not a WebSocket[]");
         return;
     }
@@ -82,13 +80,6 @@ function initErrorHandler(ws) {
 
 }
 
-
-/**
- * initializing the handler to deal all messages from connected peers
- */
-function initMessageHandler() {
-
-}
 
 
 /**
@@ -136,7 +127,63 @@ function handleBlockchainResponse(receivedBlocks) {
         /*** there's > 1 block, so take em all ***/
         this.replaceChain(receivedBlocks);
     }
+}
 
+
+/**
+ * processes any received message
+ * @param ws
+ */
+function initMessageHandler(ws) {
+
+    if (ws !== WebSocket) {
+        console.log("initMessageHandler failed: ws is not a WebSocket");
+        return;
+    }
+
+    /**
+     * anonymous function, in which dara is the actual message
+     */
+    ws.onmessage( (data) => {
+        const msg = parseMessage(data);
+        if (!msg instanceof Message) return;
+
+        console.log("Received Message" + JSON.stringify(msg));
+
+        /*** testing message type, to react properly ***/
+        switch (msg.type) {
+            case MessageType.QUERY_LATEST:
+                sendMessage(ws, responseLatestMessage());
+                break;
+            case MessageType.QUERY_ALL:
+                sendMessage(ws, responseBlockchainMessage());
+                break;
+            case MessageType.RESPONSE_BLOCKCHAIN:
+                const receivedBlocks = msg.data;
+                if (receivedBlocks === null) {
+                    console.log("Message Data: Invalid Blocks");
+                    return;
+                }
+                handleBlockchainResponse(receivedBlocks);
+                break;
+            default:
+                console.log("Message missed all cases");
+                break;
+        }
+    });
+}
+
+/**
+ * \parses message
+ * @param data
+ */
+function parseMessage(data) {
+    try {
+        return JSON.parse(data);
+    } catch (e) {
+        console.log("Error parsing message");
+        return null;
+    }
 }
 
 
@@ -150,6 +197,7 @@ function sendMessage(who, message) {
     if (who === WebSocket) who.send(JSON.stringify(message));
 }
 
+
 /**
  * send a message to all sockets
  */
@@ -158,4 +206,4 @@ function broadcast(message) {
 }
 
 
-export {initNetworking, connectToPeers, getSockets, broadcast};
+export {initNetworkingServer, connectToPeers, getSockets, broadcast};

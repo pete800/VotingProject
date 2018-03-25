@@ -86,3 +86,5 @@ class Block {
 	}
 
 }
+
+export {Block};

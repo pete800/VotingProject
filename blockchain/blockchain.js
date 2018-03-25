@@ -1,4 +1,5 @@
 import {broadcast} from './networking';
+import {Block} from "./block";
 
 
 class Blockchain {

@@ -1,5 +1,6 @@
 var Block = require('./block');
 var networking = require('./networking');
+var message = require('./message');
 
 class Blockchain {
 
@@ -49,7 +50,7 @@ class Blockchain {
         let prevBlock = this.getLatestBlock();    // used to get prev hash
         let newBlock = new Block(Date.now(), UserID.toString(), vote, prevBlock.getHash);
         this.addBlock(newBlock);
-        networking.broadcast();
+        networking.broadcast(message.responseLatestMessage());
         return newBlock;
     }
 

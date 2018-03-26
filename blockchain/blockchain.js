@@ -22,7 +22,7 @@ class Blockchain {
      * @returns {Block}
      */
 	createGenesisBlock() {
-        return new Block(Date.now(), 0, 0, "");
+        return new Block(Date.now(), 0, 0,"","","");
     }
 
     /**
@@ -45,10 +45,9 @@ class Blockchain {
     /**
      * generates next block in the chain
      */
-    generateNewBlock(UserID, vote) {
-
+    generateNewBlock(UserID, vote, county, state) {
         let prevBlock = this.getLatestBlock();    // used to get prev hash
-        let newBlock = new Block(Date.now(), UserID.toString(), vote, prevBlock.getHash);
+        let newBlock = new Block(Date.now(), UserID.toString(), vote, county, state, prevBlock.getHash);
         this.addBlock(newBlock);
         networking.broadcast();
         return newBlock;
@@ -59,10 +58,9 @@ class Blockchain {
     *
     */
     printChain(){
-        for(var x = 0; x < this.chain.length; x++)
-       {
+        for(var x = 0; x < this.chain.length; x++) {
             console.log(this.chain[x]);
-       }
+        }
     }
 
     /**
@@ -106,7 +104,6 @@ class Blockchain {
      * @returns {boolean}
      */
     isChainValid() {
-
 		// from oldest to youngest
         for (let i = 1; i < this.chain.length; i++){
 

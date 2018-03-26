@@ -12,12 +12,13 @@ class Block {
 	public nonce: number;
 	*/
 
-    constructor(timestamp, UserID, vote, previousHash = '') {
-
+    constructor(timestamp, UserID, vote, county, state, previousHash = '') {
         this.previousHash = previousHash;
         this.timestamp = timestamp;
 		this.UserID = UserID;
 		this.vote = vote;
+		this.county = county;
+		this.state = state;
 		this.nonce = 0;
 		this.hash = this.calculateHash();
     }
@@ -36,7 +37,7 @@ class Block {
      */
     calculateHash() {
         return SHA256(this.previousHash + this.timestamp
-            + this.UserID + this.vote
+            + this.UserID + this.vote + this.county + this.state
             + this.nonce).toString();
     }
 

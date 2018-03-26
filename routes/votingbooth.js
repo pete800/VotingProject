@@ -10,7 +10,6 @@ router.get('/', function(req, res) {
         var year = '2018';
         data = db.query('SELECT * FROM Candidates WHERE YearVote=' + db.escape(year) + ';', function (error, results, field) {
             if (error) throw error;
-            console.log(results);
             res.render('votingbooth', {candidates: results});
         });
     }else{
@@ -23,12 +22,13 @@ router.post('/vote', function(req, res){
     //Process vote
     db.query('SELECT * FROM Users WHERE UserID='+db.escape(req.authentication_session.user)+';', function(error, results, field){
         if(error) throw error;
-        console.log(results);
         var hash = SHA256(results.UserID + results.FName + results.LName + results.SSH + results.Street + results.City
             + results.StateCode + results.County);
         blockchain.generateNewBlock(hash, vote);
         req.authentication_session.reset();
     });
+    blockchain.printChain();
+    blockchain.isChainValid();
     res.redirect('/processing');
 });
 

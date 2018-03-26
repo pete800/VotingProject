@@ -47,13 +47,22 @@ class Blockchain {
     generateNewBlock(UserID, vote) {
 
         let prevBlock = this.getLatestBlock();    // used to get prev hash
-        console.log(prevBlock);
         let newBlock = new Block(Date.now(), UserID.toString(), vote, prevBlock.getHash);
         this.addBlock(newBlock);
         networking.broadcast();
         return newBlock;
     }
 
+   /**
+    *   Print entire blockchain for debug purposes to make sure it is gathering data properly
+    *
+    */
+    printChain(){
+        for(var x = 0; x < this.chain.length; x++)
+       {
+            console.log(this.chain[x]);
+       }
+    }
 
     /**
      * determines if new block is valid, and adds to chain if so

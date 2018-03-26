@@ -31,7 +31,6 @@ router.post('/add', function(req, res){
             req.authentication_session.reset();
         }
     });
-    console.log(results);
 });
 
 function serialize(data)

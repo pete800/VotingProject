@@ -143,7 +143,7 @@ class Blockchain {
 
             console.log('Replacing chain');
             this.chain = newBlocks;
-            networking.broadcast();
+            networking.broadcast(message.responseLatestMessage());
 
         } else {
             console.log('Invalid chain received');

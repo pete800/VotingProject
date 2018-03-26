@@ -22,7 +22,7 @@ function initHTTPServer(port) {
 
     app.get('/mineBlocks', function (req, res) {
         /*** stub ****/
-        const newBlock =
+        const newBlock = 0;
         });
     
     /*** list peers ***/

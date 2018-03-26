@@ -23,9 +23,6 @@ class Block {
     }
 
 
-    initializeHash(){
-		this.hash = this.calculateHash();
-	}
     get getHash(){
         return this.hash;
     }

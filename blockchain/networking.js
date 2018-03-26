@@ -58,8 +58,8 @@ function initConnection(ws) {
 function connectToPeers(peer) {
 
     const ws = new WebSocket(peer);
-    ws.onopen( () => initConnection(ws));
-    ws.onerror( () => console.log("connection failed"));
+    ws.on('open', () => initConnection(ws));
+    ws.on('error', () => console.log("connection failed"));
 }
 
 
@@ -74,8 +74,8 @@ function initErrorHandler(ws) {
         return;
     }
 
-    ws.onclose( () => closeConn(ws));
-    ws.onerror( () => closeConn(ws));
+    ws.on('close', () => closeConn(ws));
+    ws.on('error', () => closeConn(ws));
 
 }
 
@@ -143,7 +143,7 @@ function initMessageHandler(ws) {
     /**
      * anonymous function, in which dara is the actual message
      */
-    ws.onmessage( (data) => {
+    ws.on('message', (data) => {
         const msg = parseMessage(data);
         if (!msg instanceof message.Message) return;
 

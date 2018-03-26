@@ -4,7 +4,7 @@ var message = require('./message');
 const WebSocket = require('ws');
 
 const sockets = [];
-var ws;
+
 /**
  * get sockets (peers)
  */
@@ -57,7 +57,7 @@ function initConnection(ws) {
  */
 function connectToPeers(peer) {
 
-    ws = new WebSocket(peer);
+    const ws = new WebSocket(peer);
     ws.onopen( () => initConnection(ws));
     ws.onerror( () => console.log("connection failed"));
 }
@@ -205,7 +205,7 @@ function broadcast(message) {
 }
 
 
-module.export.initNetworkingServer = initNetworkingServer;
-module.export.connectToPeers = connectToPeers;
+module.exports.initNetworkingServer = initNetworkingServer;
+module.exports.connectToPeers = connectToPeers;
 module.exports.getSockets = getSockets;
 module.exports.broadcast = broadcast;

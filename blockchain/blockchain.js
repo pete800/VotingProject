@@ -1,5 +1,5 @@
 var Block = require('./block');
-var broadcast = require('./networking');
+var networking = require('./networking');
 
 class Blockchain {
 
@@ -46,11 +46,11 @@ class Blockchain {
      */
     generateNewBlock(UserID, vote) {
 
-        prevBlock = this.getLatestBlock();    // used to get prev hash
-
-        newBlock = new Block(Date.now(), UserID, vote, prevBlock.getHash());
+        let prevBlock = this.getLatestBlock();    // used to get prev hash
+        console.log(prevBlock);
+        let newBlock = new Block(Date.now(), UserID.toString(), vote, prevBlock.getHash);
         this.addBlock(newBlock);
-        broadcast();
+        networking.broadcast();
         return newBlock;
     }
 
@@ -77,7 +77,7 @@ class Blockchain {
      * @returns {boolean}
      */
     isValidNewBlock(newBlock) {
-        return newBlock.getPHash() === this.getLatestBlock().getHash();
+        return newBlock.getPHash === this.getLatestBlock().getHash;
     }
 
 
@@ -133,7 +133,7 @@ class Blockchain {
 
             console.log('Replacing chain');
             this.chain = newBlocks;
-            broadcast();
+            networking.broadcast();
 
         } else {
             console.log('Invalid chain received');

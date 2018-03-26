@@ -1,6 +1,6 @@
 const SHA256 = require("crypto-js/sha256");
 
-var block = class Block {
+class Block {
 
 	/**
 	public index: number;
@@ -87,4 +87,4 @@ var block = class Block {
 
 }
 
-module.exports = block;
+module.exports = Block;

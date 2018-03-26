@@ -24,11 +24,11 @@ router.post('/add', function(req, res){
         if(results.length === 1) {
             //Authentication successful
             //TODO: Add checking to make sure someone doesn't vote twice
-            req.authentication_session.user = results[0].UserID;
+            req.session.user = results[0].UserID;
             res.redirect('/votingbooth/')
         }else{
             //Authentication Unsuccessful
-            req.authentication_session.reset();
+            req.session.reset();
         }
     });
 });

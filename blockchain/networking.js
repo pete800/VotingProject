@@ -46,7 +46,7 @@ function initConnection(ws) {
     sockets.push(ws);
     initMessageHandler(ws);
     initErrorHandler(ws);
-    sendMessage(ws, queryChainLengthMessage());
+    sendMessage(ws, message.queryChainLengthMessage());
 }
 
 
@@ -106,22 +106,22 @@ function handleBlockchainResponse(receivedBlocks) {
     }
 
     /*** validating structure ***/
-    const latestBlockRecieved = receivedBlocks[receivedBlocks.length-1];
-    if (!latestBlockRecieved.isValidBlockStructure()) {
+    const latestBlockReceived = receivedBlocks[receivedBlocks.length-1];
+    if (!latestBlockReceived.isValidBlockStructure()) {
         console.log("Invalid Block");
         return;
     }
 
     const latestBlock = blockchain.getLatestBlock();
     /*** is this a new block that agrees with previous chain ***/
-    if ( latestBlockRecieved.getPHash() === latestBlock.getHash()) {
+    if ( latestBlockReceived.getPHash() === latestBlock.getHash()) {
         /*** if so, lets add it to chain ***/
-        if (blockchain.addBlock(latestBlockRecieved)) {
-            broadcast(responseLatestMessage());
+        if (blockchain.addBlock(latestBlockReceived)) {
+            broadcast(message.responseLatestMessage());
         }
     } else if (receivedBlocks.length === 1) {
         /*** query bc this shouldn't be ***/
-        broadcast(queryAllMessage());
+        broadcast(message.queryAllMessage());
     } else {
         /*** there's > 1 block, so take em all ***/
         this.replaceChain(receivedBlocks);
@@ -145,19 +145,19 @@ function initMessageHandler(ws) {
      */
     ws.onmessage( (data) => {
         const msg = parseMessage(data);
-        if (!msg instanceof Message) return;
+        if (!msg instanceof message.Message) return;
 
         console.log("Received Message" + JSON.stringify(msg));
 
         /*** testing message type, to react properly ***/
         switch (msg.type) {
-            case MessageType.QUERY_LATEST:
-                sendMessage(ws, responseLatestMessage());
+            case message.MessageType.QUERY_LATEST:
+                sendMessage(ws, message.responseLatestMessage());
                 break;
-            case MessageType.QUERY_ALL:
-                sendMessage(ws, responseBlockchainMessage());
+            case message.MessageType.QUERY_ALL:
+                sendMessage(ws, message.responseBlockchainMessage());
                 break;
-            case MessageType.RESPONSE_BLOCKCHAIN:
+            case message.MessageType.RESPONSE_BLOCKCHAIN:
                 const receivedBlocks = msg.data;
                 if (receivedBlocks === null) {
                     console.log("Message Data: Invalid Blocks");

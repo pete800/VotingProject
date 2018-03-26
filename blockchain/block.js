@@ -5,19 +5,19 @@ class Block {
 	/**
 	public index: number;
 	public timestamp: number;
-	public aVotes: number;
-	public bVotes: number;
+	public UserID: number;
+	public vote: number;
 	public previousHash: string;
 	public hash: string;
 	public nonce: number;
 	*/
 
-    constructor(timestamp, aVotes, bVotes, previousHash = '') {
+    constructor(timestamp, UserID, vote, previousHash = '') {
 
         this.previousHash = previousHash;
         this.timestamp = timestamp;
-		this.aVotes = aVotes;
-		this.bVotes = bVotes;
+		this.UserID = UserID;
+		this.vote = vote;
         this.hash = this.calculateHash();
 		this.nonce = 0;
     }
@@ -36,7 +36,7 @@ class Block {
      */
     calculateHash() {
         return SHA256(this.previousHash + this.timestamp
-            + this.aVotes + this.bVotes
+            + this.UserID + this.vote
             + this.nonce).toString();
     }
 
@@ -77,14 +77,14 @@ class Block {
      */
 	isValidBlockStructure() {
 
-		return typeof this.aVotes === 'number' &&
+		return typeof this.UserID === 'number' &&
 			typeof this.hash === 'string' &&
 			typeof this.previousHash === 'string' &&
-			typeof this.aVotes === 'number' &&
-			typeof this.bVotes === 'number';
+			typeof this.UserID === 'number' &&
+			typeof this.vote === 'number';
 
 	}
 
 }
 
-export {Block};
+module.exports.Block = Block;

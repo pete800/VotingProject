@@ -1,11 +1,10 @@
-import {blockchain} from "./blockchain";
-import {Message, MessageType, responseLatestMessage, queryAllMessage,
-    queryChainLengthMessage, queryChainLengthMessage, responseBlockchainMessage} from "./message";
+var blockchain = require('./blockchain');
+var message = require('./message');
 
 const WebSocket = require('ws');
 
 const sockets = [];
-
+var ws;
 /**
  * get sockets (peers)
  */
@@ -58,7 +57,7 @@ function initConnection(ws) {
  */
 function connectToPeers(peer) {
 
-    const ws = new WebSocket(peer);
+    ws = new WebSocket(peer);
     ws.onopen( () => initConnection(ws));
     ws.onerror( () => console.log("connection failed"));
 }
@@ -206,4 +205,7 @@ function broadcast(message) {
 }
 
 
-export {initNetworkingServer, connectToPeers, getSockets, broadcast};
+module.export.initNetworkingServer = initNetworkingServer;
+module.export.connectToPeers = connectToPeers;
+module.exports.getSockets = getSockets;
+module.exports.broadcast = broadcast;

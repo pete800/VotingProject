@@ -1,5 +1,4 @@
-import {blockchain} from "./blockchain";
-
+var blockchain = require('./blockchain');
 /***
  * defining the types of messages that will be sent
  */
@@ -14,9 +13,6 @@ var MessageType = {
  * For structured communication among nodes
  */
 class Message {
-    public type;     // must test to ensure the enum
-    public data;
-
     constructor(type, data) {
         if (type === MessageType) {
             this.type = type;
@@ -64,5 +60,10 @@ function responseLatestMessage() {
         JSON.stringify(blockchain.getLatestBlock()));
 }
 
-export {Message, MessageType, responseLatestMessage, queryAllMessage, queryChainLengthMessage,
- responseBlockchainMessage};
+
+module.exports.Message = Message;
+module.exports.MessageType = MessageType;
+module.exports.responseLatestMessage = responseLatestMessage;
+module.exports.queryAllMessage = queryAllMessage;
+module.exports.queryChainLengthMessage = queryChainLengthMessage;
+module.exports.responseBlockchainMessage = responseBlockchainMessage;

@@ -9,7 +9,7 @@ class Vote {
 	// oaram name - name of voter
 	// param candidste - who the vote is for
 	//
-	constructor(name, counrty, candidate) {
+	constructor(name, county, candidate) {
 		
 		this.name = name;
 		this.county = county;

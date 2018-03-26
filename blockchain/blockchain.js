@@ -1,6 +1,5 @@
-import {broadcast} from './networking';
-import {Block} from "./block";
-
+var Block = require('./block');
+var broadcast = require('./networking');
 
 class Blockchain {
 
@@ -45,11 +44,11 @@ class Blockchain {
     /**
      * generates next block in the chain
      */
-    generateNewBlock() {
+    generateNewBlock(UserID, vote) {
 
         prevBlock = this.getLatestBlock();    // used to get prev hash
 
-        newBlock = new Block(Date.now(), 0, 0, prevBlock.getHash());
+        newBlock = new Block(Date.now(), UserID, vote, prevBlock.getHash());
         this.addBlock(newBlock);
         broadcast();
         return newBlock;
@@ -144,4 +143,4 @@ class Blockchain {
 }
 
 const blockchain = new Blockchain();
-export {blockchain};
+module.exports = blockchain;

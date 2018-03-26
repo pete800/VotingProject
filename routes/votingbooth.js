@@ -26,6 +26,7 @@ router.post('/vote', function(req, res){
             + results.StateCode + results.County);
         blockchain.generateNewBlock(hash, vote);
         req.authentication_session.reset();
+        var userHash = hash.toString();
     });
     blockchain.printChain();
     blockchain.isChainValid();

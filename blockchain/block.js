@@ -18,11 +18,14 @@ class Block {
         this.timestamp = timestamp;
 		this.UserID = UserID;
 		this.vote = vote;
-        this.hash = this.calculateHash();
 		this.nonce = 0;
+		this.hash = this.calculateHash();
     }
 
 
+    initializeHash(){
+		this.hash = this.calculateHash();
+	}
     get getHash(){
         return this.hash;
     }

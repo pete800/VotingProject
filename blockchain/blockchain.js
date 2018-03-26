@@ -50,7 +50,7 @@ class Blockchain {
         let prevBlock = this.getLatestBlock();    // used to get prev hash
         let newBlock = new Block(Date.now(), UserID.toString(), vote, prevBlock.getHash);
         this.addBlock(newBlock);
-        networking.broadcast(message.responseLatestMessage());
+        networking.broadcast();
         return newBlock;
     }
 
@@ -110,10 +110,13 @@ class Blockchain {
 		// from oldest to youngest
         for (let i = 1; i < this.chain.length; i++){
 
-            const currentBlock = this.chain[i];
-            const previousBlock = this.chain[i - 1];
+            let currentBlock = this.chain[i];
+            let previousBlock = this.chain[i - 1];
 
             if (currentBlock.hash !== currentBlock.calculateHash()) {    // are contents valid
+                console.log('Current Hash:' + currentBlock.hash);
+                console.log('Calculated Hash:' + currentBlock.calculateHash());
+                console.log('ID:'+i);
                 console.log("Invalid Chain: current block's hash is invalid");
                 return false;
             }
@@ -150,6 +153,39 @@ class Blockchain {
         }
     }
 
+    /**
+     * Checks to see if the userHash is part of the chain
+     * @param userHash
+     */
+    checkChainForID(userHash)
+    {
+        for(var x = 0; x < this.chain.length; x++)
+        {
+            if(this.chain.UserID === userHash)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the block location of a speicified UserID
+     * Returns Location of block if exists. Else returns -1
+     * @param userHash
+     * @returns {number}
+     */
+    getBlockForID(userHash)
+    {
+        for(var x = 0; x < this.chain.length; x++)
+        {
+            if(this.chain.UserID === userHash)
+            {
+                return x;
+            }
+        }
+        return -1;
+    }
 }
 
 const blockchain = new Blockchain();

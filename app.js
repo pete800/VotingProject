@@ -23,6 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
+
 app.use(session({
     cookieName: 'authentication_session',
     secret: '3fSSgXgevb60GGE8jGGCJ8OzNWZ76Nc2CybzMzSLH8h1xHo3CXTybWSZFwik4bj6wyMZ5wEAN4ArjopU2FmO1KTtbgdYqmsv6GVk',

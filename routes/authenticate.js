@@ -3,6 +3,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
+    //TODO: Add check flag to make sure voting is actually open
+
     res.render('authenticate');
 
 });
@@ -21,6 +23,7 @@ router.post('/add', function(req, res){
         if(error) throw error;
         if(results.length === 1) {
             //Authentication successful
+            //TODO: Add checking to make sure someone doesn't vote twice
             req.authentication_session.user = results[0].UserID;
             res.redirect('/votingbooth/')
         }else{

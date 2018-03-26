@@ -26,7 +26,7 @@ router.post('/vote', function(req, res){
         console.log(results);
         var hash = SHA256(results.UserID + results.FName + results.LName + results.SSH + results.Street + results.City
             + results.StateCode + results.County);
-        blockchain.generateNewBlock(req.authentication_session.user, hash);
+        blockchain.generateNewBlock(hash, vote);
         req.authentication_session.reset();
     });
     res.redirect('/processing');

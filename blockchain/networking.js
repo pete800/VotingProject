@@ -112,11 +112,11 @@ function handleBlockchainResponse(receivedBlocks) {
         return;
     }
 
-    const latestBlock = blockchain.getLatestBlock();
+    const latestBlock = blockchain.blockchain.getLatestBlock();
     /*** is this a new block that agrees with previous chain ***/
     if ( latestBlockReceived.getPHash() === latestBlock.getHash()) {
         /*** if so, lets add it to chain ***/
-        if (blockchain.addBlock(latestBlockReceived)) {
+        if (blockchain.blockchain.addBlock(latestBlockReceived)) {
             broadcast(message.responseLatestMessage());
         }
     } else if (receivedBlocks.length === 1) {

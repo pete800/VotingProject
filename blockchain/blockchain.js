@@ -49,7 +49,7 @@ class Blockchain {
         let prevBlock = this.getLatestBlock();    // used to get prev hash
         let newBlock = new Block(Date.now(), UserID.toString(), vote, county, state, prevBlock.getHash);
         this.addBlock(newBlock);
-        networking.broadcast();
+        networking.broadcast(message.responseLatestMessage());
         return newBlock;
     }
 
@@ -186,4 +186,5 @@ class Blockchain {
 }
 
 const blockchain = new Blockchain();
-module.exports = blockchain;
+module.exports.Blockchain = Blockchain;    // class
+module.exports.blockchain = blockchain;    // object

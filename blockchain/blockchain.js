@@ -47,7 +47,7 @@ class Blockchain {
      */
     generateNewBlock(UserID, vote, county, state) {
         let prevBlock = this.getLatestBlock();    // used to get prev hash
-        let newBlock = new Block(Date.now(), UserID.toString(), vote, county, state, prevBlock.getHash);
+        let newBlock = new Block(Date.now(), prevBlock.index+1, UserID.toString(), vote, county, state, prevBlock.getHash);
         this.addBlock(newBlock);
         networking.broadcast();
         return newBlock;
@@ -138,7 +138,6 @@ class Blockchain {
      * @param newBlocks
      */
 	replaceChain(newBlocks) {
-
         if (newBlocks.isChainValid() && newBlocks.length > this.chain.length) {
 
             console.log('Replacing chain');
@@ -150,12 +149,15 @@ class Blockchain {
         }
     }
 
+    verifyUsersInBlocks(){
+
+    }
+
     /**
      * Checks to see if the userHash is part of the chain
      * @param userHash
      */
-    checkChainForID(userHash)
-    {
+    checkChainForID(userHash) {
         for(var x = 0; x < this.chain.length; x++)
         {
             if(this.chain.UserID === userHash)

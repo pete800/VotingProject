@@ -7,6 +7,9 @@ var index = require('./routes/index');
 var authenticate = require('./routes/authenticate');
 var votingbooth = require('./routes/votingbooth');
 var processing = require('./routes/processing');
+var voted = require('./routes/voted');
+var trackblock = require('./routes/trackblock');
+
 var app = express();
 
 //Set up mysql
@@ -39,7 +42,8 @@ app.use('/', index);
 app.use('/authenticate', authenticate);
 app.use('/votingbooth', votingbooth);
 app.use('/processing', processing);
-
+app.use('/voted', voted);
+app.use('/trackblock', trackblock);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -12,8 +12,9 @@ class Block {
 	public nonce: number;
 	*/
 
-    constructor(timestamp, UserID, vote, county, state, previousHash = '') {
+    constructor(timestamp,index, UserID, vote, county, state, previousHash = '') {
         this.previousHash = previousHash;
+        this.index = index;
         this.timestamp = timestamp;
 		this.UserID = UserID;
 		this.vote = vote;

@@ -43,12 +43,12 @@ function queryAllMessage() {
 }
 
 /**
- * sends an entire blockchain
+ * sends an entire bcModule
  * @returns {Message}
  */
 function responseBlockchainMessage() {
     return new Message(MessageType.RESPONSE_BLOCKCHAIN,
-        JSON.stringify(blockchain.getBlockchain()));
+        JSON.stringify(blockchain.blockchain.getBlockchain()));
 }
 
 /**
@@ -56,8 +56,8 @@ function responseBlockchainMessage() {
  * @returns {Message}
  */
 function responseLatestMessage() {
-    return new Message(MessageType.RESPONSE_BLOCKCHAIN,
-        JSON.stringify(blockchain.getLatestBlock()));
+        return new Message(MessageType.RESPONSE_BLOCKCHAIN,
+            JSON.stringify(blockchain.blockchain.getLatestBlock()));
 }
 
 

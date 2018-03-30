@@ -17,13 +17,12 @@ router.post('/add', function(req, res){
     var city = req.body.city;
     var state = req.body.state;
     var county = req.body.county;
-    var results = db.query('SELECT UserID FROM Users WHERE FName=' + db.escape(firstname) + ' AND LName='+db.escape(lastname)+' AND ' +
+    db.query('SELECT UserID FROM Users WHERE FName=' + db.escape(firstname) + ' AND LName='+db.escape(lastname)+' AND ' +
         'SSN='+db.escape(ssn)+' AND Street='+db.escape(street)+' AND City=' + db.escape(city)+' AND ' +
         'StateCode='+db.escape(state)+' AND County='+db.escape(county)+';', function(error,results,field){
         if(error) throw error;
         if(results.length === 1) {
             //Authentication successful
-            //TODO: Add checking to make sure someone doesn't vote twice
             req.session.user = results[0].UserID;
             res.redirect('/votingbooth/')
         }else{

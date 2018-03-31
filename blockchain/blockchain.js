@@ -33,6 +33,17 @@ class Blockchain {
     }
 
     /**
+     * Set blockchain
+     */
+    setBlockchain(b) {
+        if (b === [])
+            this.chain = b;
+        else
+            console.log("Failed to set chain: input is not an array");
+    }
+
+
+    /**
      * get most recent block
      *
      * @returns {*}

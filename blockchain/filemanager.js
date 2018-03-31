@@ -21,9 +21,20 @@ function writeBlockchainJSON() {
  */
 function loadBlockchainJSON() {
     loadJsonFile(jsonFile).then( json => {
-        blockchain.blockchain.setBlockchain(json);
+        try{
+            blockchain.blockchain.setBlockchain(json);
+        }catch(Exception){
+            console.log(exception);
+        }
     }, json => {
         console.log("Failed to load JSON:" + json);
     });
 }
 
+
+function loadConnectionList() {
+
+}
+
+module.exports.loadBlockchainJSON = loadBlockchainJSON;
+module.exports.writeBlockchainJSON = writeBlockchainJSON;

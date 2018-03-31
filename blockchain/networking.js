@@ -18,11 +18,11 @@ function getSockets() {
  */
 function initNetworkingServer(port) {
 
-    const wss = WebSocket.Server({
+    const wss = new WebSocket.Server({
         port: port
     });
-
-    wss.on('connection', function (ws) {
+    wss.on('connection', function connection(ws, req) {
+        console.log("in function");
         if (ws === WebSocket) {
             initConnection(ws);
             console.log("WebSocket listening on port" + port);

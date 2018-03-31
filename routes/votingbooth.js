@@ -32,11 +32,11 @@ router.post('/vote', function(req, res){
         if(error) throw error;
         var hash = SHA256(results[0].UserID + results[0].FName + results[0].LName + results[0].SSH + results[0].Street + results[0].City
             + results[0].StateCode + results[0].County);
-        blockchain.generateNewBlock(hash, vote, results[0].County, results[0].StateCode);
+        blockchain.blockchain.generateNewBlock(hash, vote, results[0].County, results[0].StateCode);
     });
-    db.query('UPDATE voted SET Year2018=1 WHERE UserID='+db.escape(req.session.user), function(error, results, field){});
-    blockchain.isChainValid();
-    console.log(blockchain.printChain());
+    //db.query('UPDATE voted SET Year2018=1 WHERE UserID='+db.escape(req.session.user), function(error, results, field){});
+    blockchain.blockchain.isChainValid();
+    console.log(blockchain.blockchain.printChain());
     req.session.reset();
     res.redirect('/processing');
 });

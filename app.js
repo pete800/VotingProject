@@ -9,8 +9,11 @@ var votingbooth = require('./routes/votingbooth');
 var processing = require('./routes/processing');
 var voted = require('./routes/voted');
 var trackblock = require('./routes/trackblock');
-
+var networking = require('./blockchain/networking');
+var file = require('./blockchain/filemanager');
 var app = express();
+
+port = 3001;
 
 //Set up mysql
 var mysql = require('mysql');
@@ -24,6 +27,10 @@ global.db = connection;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+
+networking.initNetworkingServer(port);
+file.loadBlockchainJSON();
 
 app.use(session({
     cookieName: 'session',

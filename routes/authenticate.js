@@ -3,10 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    //TODO: Add check flag to make sure voting is actually open
-
     res.render('authenticate');
-
 });
 
 router.post('/add', function(req, res){

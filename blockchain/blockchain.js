@@ -1,6 +1,7 @@
 var Block = require('./block');
 var networking = require('./networking');
 var message = require('./message');
+var file = require('./filemanager');
 
 class Blockchain {
 
@@ -36,10 +37,9 @@ class Blockchain {
      * Set blockchain
      */
     setBlockchain(b) {
-        if (b === [])
-            this.chain = b;
-        else
-            console.log("Failed to set chain: input is not an array");
+        for(x=0; x < b.length; x++) {
+            this.chain.push(b[x]);
+        }
     }
 
 
@@ -83,6 +83,7 @@ class Blockchain {
     addBlock(newBlock) {
         if (this.isValidNewBlock(newBlock)) {
             this.chain.push(newBlock);
+            //file.writeBlockchainJSON();
             return true;
         }
         return false;
@@ -171,7 +172,7 @@ class Blockchain {
     checkChainForID(userHash) {
         for(var x = 0; x < this.chain.length; x++)
         {
-            if(this.chain.UserID === userHash)
+            if(this.chain[x].UserID === userHash)
             {
                 return true;
             }
@@ -189,12 +190,20 @@ class Blockchain {
     {
         for(var x = 0; x < this.chain.length; x++)
         {
-            if(this.chain.UserID === userHash)
+            if(this.chain[x].UserID === userHash)
             {
                 return x;
             }
         }
         return -1;
+    }
+
+    getBlockAtIndex(index){
+        try{
+            return this.chain[index];
+        }catch(ex) {
+            return -1;
+        }
     }
 }
 

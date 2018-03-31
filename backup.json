@@ -1,0 +1,24 @@
+[
+	{
+		"previousHash": "",
+		"index": 0,
+		"timestamp": 1522528463921,
+		"UserID": 0,
+		"vote": "",
+		"county": "",
+		"state": "",
+		"nonce": 0,
+		"hash": "f90c60ce8fc5049d81473d14b533314dbf30fcb0e7fedb02bf65eb6a6ced39cf"
+	},
+	{
+		"previousHash": "f90c60ce8fc5049d81473d14b533314dbf30fcb0e7fedb02bf65eb6a6ced39cf",
+		"index": 1,
+		"timestamp": 1522528487132,
+		"UserID": "6b58418a26b0728bdaac088cd3cf810511826d33859f8c913b5986060e0127b3",
+		"vote": "1",
+		"county": "Monroe",
+		"state": "NY",
+		"nonce": 0,
+		"hash": "444e085a42f99e73ae8c877cfdaea883108092094c74913f8f07b60d60c0b2f5"
+	}
+]

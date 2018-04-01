@@ -84,7 +84,6 @@ class Block {
 			typeof this.previousHash === 'string' &&
 			typeof this.UserID === 'number' &&
 			typeof this.vote === 'number';
-
 	}
 
 }

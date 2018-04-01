@@ -131,7 +131,7 @@ function handleBlockchainResponse(receivedBlocks) {
     } else if (receivedBlocks.length === 1) {
         /*** query bc this shouldn't be ***/
         broadcast(message.queryAllMessage());
-    } else {
+    } else if (!blockchain.blockchain.isChainEqual(newChain.chain)){
         /*** there's > 1 block, so take em all ***/
         blockchain.blockchain.replaceChain(newChain);
     }

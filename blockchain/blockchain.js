@@ -180,6 +180,20 @@ class Blockchain {
         return true;
     }
 
+    isChainEqual(chain){
+        if(this.chain.length === chain.length){
+            return false;
+        }
+        for(let x = 0; x < chain.length; x++)
+        {
+            if(chain[x].hash !== this.chain[x].hash)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     /**
      * Replacing old chain with newly reieved

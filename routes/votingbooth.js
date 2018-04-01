@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
         data = db.query('SELECT * FROM Candidates WHERE YearVote=' + db.escape(year) + ';', function (error, results, field) {
             if (error) throw error;
             db.query('SELECT * FROM voted WHERE UserID='+db.escape(req.session.user), function(error, results2, field){
+                if(error) throw error;
                 if(results2[0].Year2018 === 1)
                 {
                     res.redirect('/voted');

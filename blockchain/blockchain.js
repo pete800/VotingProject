@@ -116,6 +116,15 @@ class Blockchain {
     }
 
 
+    /**
+     * Iterates through blockchain and tallies votes
+     */
+    tallyVotes() {
+        let votes = [];
+        this.chain.forEach(block => votes[block.vote]++);
+        console.log(votes);
+    }
+
 	//
 	// add a block to the chain
 	//

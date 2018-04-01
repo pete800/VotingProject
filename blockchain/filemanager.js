@@ -32,9 +32,5 @@ function loadBlockchainJSON() {
 }
 
 
-function loadConnectionList() {
-
-}
-
 module.exports.loadBlockchainJSON = loadBlockchainJSON;
 module.exports.writeBlockchainJSON = writeBlockchainJSON;

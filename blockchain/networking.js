@@ -99,6 +99,7 @@ function closeConn(ws) {
  */
 function handleBlockchainResponse(receivedBlocks) {
 
+    console.log(receivedBlocks);
     /*** checking if empty ***/
     if (receivedBlocks.length === 0) {
         console.log("Blockchain is empty");
@@ -107,6 +108,7 @@ function handleBlockchainResponse(receivedBlocks) {
 
     /*** validating structure ***/
     const latestBlockReceived = receivedBlocks[receivedBlocks.length-1];
+    console.log(latestBlockReceived);
     if (!latestBlockReceived.isValidBlockStructure()) {
         console.log("Invalid Block");
         return;

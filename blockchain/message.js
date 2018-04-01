@@ -48,7 +48,7 @@ function queryAllMessage() {
  * @returns {Message}
  */
 function responseBlockchainMessage() {
-    return new Message(MessageType.RESPONSE_BLOCKCHAIN,JSON.stringify(blockchain.blockchain.getBlockchain()));
+    return new Message(MessageType.RESPONSE_BLOCKCHAIN,blockchain.blockchain.getBlockchain());
 }
 
 /**

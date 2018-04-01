@@ -99,7 +99,7 @@ function closeConn(ws) {
  */
 function handleBlockchainResponse(receivedBlocks) {
 
-    console.log('incoming chain: ' + receivedBlocks);
+    console.log('incoming chain: ' + receivedBlocks.toString());
     /*** checking if empty ***/
     if (receivedBlocks.length === 0) {
         console.log("Blockchain is empty");

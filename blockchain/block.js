@@ -101,8 +101,7 @@ class Block {
      * @returns {boolean}
      */
 	isValidBlockStructure() {
-        console.log(
-            );
+
 
 		return typeof this.hash === 'string' &&
         typeof this.previousHash === 'string' &&

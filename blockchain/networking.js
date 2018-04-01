@@ -101,6 +101,8 @@ function handleBlockchainResponse(receivedBlocks) {
     let newChain = new blockchain.Blockchain();
     newChain.setBlockchainFromFile(receivedBlocks);
     receivedBlocks = newChain.chain;
+    console.log(newChain);
+    console.log(blockchain.blockchain.chain);
     /*** checking if empty ***/
     if (receivedBlocks.length === 0) {
         console.log("Blockchain is empty");

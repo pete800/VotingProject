@@ -29,9 +29,10 @@ global.db = connection;
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+file.loadBlockchainJSON();
+
 networking.initNetworkingServer(port);
 networking.connectToPeers(connections.server1);
-file.loadBlockchainJSON();
 
 app.use(session({
     cookieName: 'session',

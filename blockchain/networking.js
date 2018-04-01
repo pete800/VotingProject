@@ -101,7 +101,6 @@ function handleBlockchainResponse(receivedBlocks) {
     let newChain = new blockchain.Blockchain();
     newChain.setBlockchainFromFile(receivedBlocks);
     receivedBlocks = newChain.chain;
-    console.log(newChain);
     console.log(blockchain.blockchain.chain);
     /*** checking if empty ***/
     if (receivedBlocks.length === 0) {
@@ -206,6 +205,7 @@ function sendMessage(who, message) {
  * send a message to all sockets
  */
 function broadcast(message) {
+    console.log(sockets);
     sockets.forEach(s => sendMessage(s, message));
 }
 

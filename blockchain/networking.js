@@ -23,7 +23,7 @@ function initNetworkingServer(port) {
     });
     wss.on('connection', function connection(ws, req) {
         console.log("in function");
-        if (ws === WebSocket) {
+        if (ws instanceof WebSocket) {
             initConnection(ws);
             console.log("WebSocket listening on port" + port);
         } else {
@@ -39,10 +39,10 @@ function initNetworkingServer(port) {
  */
 function initConnection(ws) {
 
-    if (sockets !== []) {    // can't figure out how to check array type
-        console.log("sockets is not a WebSocket[]");
-        return;
-    }
+    // if (sockets !== []) {    // can't figure out how to check array type
+    //     console.log("sockets is not a WebSocket[]");
+    //     return;
+    // }
     sockets.push(ws);
     initMessageHandler(ws);
     initErrorHandler(ws);
@@ -69,7 +69,7 @@ function connectToPeers(peer) {
  */
 function initErrorHandler(ws) {
 
-    if (ws !== WebSocket) {
+    if (!(ws instanceof WebSocket)) {
         console.log("ws is not a WebSocket");
         return;
     }
@@ -135,7 +135,7 @@ function handleBlockchainResponse(receivedBlocks) {
  */
 function initMessageHandler(ws) {
 
-    if (ws !== WebSocket) {
+    if (!(ws instanceof WebSocket)) {
         console.log("initMessageHandler failed: ws is not a WebSocket");
         return;
     }
@@ -193,7 +193,7 @@ function parseMessage(data) {
  * @param message
  */
 function sendMessage(who, message) {
-    if (who === WebSocket) who.send(JSON.stringify(message));
+    if (who instanceof WebSocket) who.send(JSON.stringify(message));
 }
 
 

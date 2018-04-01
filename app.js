@@ -11,6 +11,7 @@ var voted = require('./routes/voted');
 var trackblock = require('./routes/trackblock');
 var networking = require('./blockchain/networking');
 var file = require('./blockchain/filemanager');
+var connections = require('./config/connections');
 var app = express();
 
 port = 3001;
@@ -29,6 +30,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 networking.initNetworkingServer(port);
+networking.connectToPeers(connections.server1);
 file.loadBlockchainJSON();
 
 app.use(session({

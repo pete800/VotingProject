@@ -14,11 +14,12 @@ var MessageType = {
  */
 class Message {
     constructor(type, data) {
-        if (type === MessageType) {
+        //if (type === MessageType) {
             this.type = type;
             this.data = data;
-        }
-        console.log("Provided 'type' was not MessageType");
+        //}
+        //else
+           // console.log("Provided 'type' was not MessageType");
     }
 }
 

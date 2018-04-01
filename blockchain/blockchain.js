@@ -24,7 +24,7 @@ class Blockchain {
      */
 	createGenesisBlock() {
         let block = new Block();
-        block.createBlock(Date.now(), "0", "0","","","");
+        block.createBlock(Date.now(), 0, "0","","","");
         return block;
     }
 
@@ -41,6 +41,7 @@ class Blockchain {
 
 
     setBlockchainFromFile(b) {
+        console.log(b);
         if(b.length > 0)
             this.chain =[];
         for(let x=0; x < b.length; x++) {

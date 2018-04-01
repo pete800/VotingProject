@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
         var year = '2018';
         data = db.query('SELECT * FROM Candidates WHERE YearVote=' + db.escape(year) + ';', function (error, results, field) {
             if (error) throw error;
-            db.query('SELECT * FROM voted WHERE UserID='+db.escape(req.session.user), function(error, results2, field){
+            db.query('SELECT * FROM Voted WHERE UserID='+db.escape(req.session.user), function(error, results2, field){
                 if(error) throw error;
                 if(results2[0].Year2018 === 1)
                 {

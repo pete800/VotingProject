@@ -23,7 +23,9 @@ class Blockchain {
      * @returns {Block}
      */
 	createGenesisBlock() {
-        return new Block(Date.now(), 0, 0,"","","");
+        let block = new Block();
+        block.createBlock(Date.now(), 0, 0,"","","");
+        return block;
     }
 
     /**
@@ -37,14 +39,29 @@ class Blockchain {
      * Set blockchain
      */
     setBlockchain(b) {
-        for(var x=0; x < b.length; x++) {
-            this.generateNewBlock(b[x].UserID, b[x].vote, b[x].county, b[x].state);
-        }
+        console.log(this.chain);
+        this.chain=b;
+        console.log(b);
+        var block = this.chain[0] instanceof Block;
+        console.log(block);
     }
 
     setBlockchainFromFile(b) {
-        for(var x=1; x < b.length; x++) {
-            this.generateNewBlockFromFile(b[x].UserID, b[x].vote, b[x].county, b[x].state);
+        this.chain =[];
+        for(let x=0; x < b.length; x++) {
+            let block = new Block();
+            block.duplicateBlock(b[x].previousHash, b[x].timestamp, b[x].index, b[x].UserID, b[x].vote,b[x].county, b[x].state,b[x].nonce, b[x].hash);
+            this.chain.push(block);
+        }
+        if(this.isChainValid())
+        {
+            console.log(this.chain);
+            return;
+        }
+        else
+        {
+            console.log('Error loading chain. Creating new one');
+            this.chain = [this.createGenesisBlock()];
         }
     }
 
@@ -60,9 +77,9 @@ class Blockchain {
 
 
     generateNewBlockFromFile(UserID, vote, county, state) {
-
         let prevBlock = this.getLatestBlock();    // used to get prev hash
-        let newBlock = new Block(Date.now(), prevBlock.index+1, UserID.toString(), vote, county, state, prevBlock.getHash);
+        let newBlock = new Block();
+        newBlock.createBlock(Date.now(), prevBlock.index+1, UserID.toString(), vote, county, state, prevBlock.getHash);
         this.addBlock(newBlock);
         return newBlock;
     }
@@ -73,7 +90,8 @@ class Blockchain {
     generateNewBlock(UserID, vote, county, state) {
 
         let prevBlock = this.getLatestBlock();    // used to get prev hash
-        let newBlock = new Block(Date.now(), prevBlock.index+1, UserID.toString(), vote, county, state, prevBlock.getHash);
+        let newBlock = new Block();
+        newBlock.createBlock(Date.now(), prevBlock.index+1, UserID.toString(), vote, county, state, prevBlock.getHash);
         this.addBlock(newBlock);
         networking.broadcast(message.responseLatestMessage());
         file.writeBlockchainJSON();
@@ -103,6 +121,8 @@ class Blockchain {
         }
         return false;
     }
+
+
 
 
     /**

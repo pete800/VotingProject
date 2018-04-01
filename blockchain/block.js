@@ -12,7 +12,7 @@ class Block {
 	public nonce: number;
 	*/
 
-    constructor(timestamp,index, UserID, vote, county, state, previousHash = '') {
+    createBlock(timestamp,index, UserID, vote, county, state, previousHash = '') {
         this.previousHash = previousHash;
         this.index = index;
         this.timestamp = timestamp;
@@ -23,6 +23,29 @@ class Block {
 		this.nonce = 0;
 		this.hash = this.calculateHash();
     }
+    /**
+     public previousHash: string;
+     public timestamp: number;
+     public index: index
+     public UserID: number;
+     public vote: number;
+     public county: string;
+     public state: string;
+     public nonce: number;
+     public hash: string;
+     */
+    duplicateBlock(previousHash, timestamp, index, UserID, vote, county, state, nonce, hash ) {
+        this.previousHash = previousHash;
+        this.index = index;
+        this.timestamp = timestamp;
+        this.UserID = UserID;
+        this.vote = vote;
+        this.county = county;
+        this.state = state;
+        this.nonce = 0;
+        this.hash = hash;
+    }
+
 
 
     get getHash(){

@@ -9,7 +9,7 @@ const jsonFile = 'backup.json';
  * function responsible for printing the blockchain backup
  */
 function writeBlockchainJSON() {
-    writeJsonFile(jsonFile, blockchain.blockchain.getBlockchain()).then( () => {
+    writeJsonFile(jsonFile, JSON.stringify(blockchain.blockchain.getBlockchain())).then( () => {
         console.log("Backup successful");
     }, () => {
         console.log("Backup failed");
@@ -21,9 +21,8 @@ function writeBlockchainJSON() {
  */
 function loadBlockchainJSON() {
     loadJsonFile(jsonFile).then( json => {
-        var newData = JSON.stringify(json);
         try{
-            blockchain.blockchain.setBlockchainFromFile(json);
+            blockchain.blockchain.setBlockchainFromFile(JSON.parse(json));
         }catch(ex){
             console.log(ex);
         }

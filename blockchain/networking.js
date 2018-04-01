@@ -98,14 +98,8 @@ function closeConn(ws) {
  * @param receivedBlocks
  */
 function handleBlockchainResponse(receivedBlocks) {
-    if(receivedBlocks === 1)
-    {
-        console.log('one');
-    }
-    console.log(receivedBlocks);
     let newChain = new blockchain.Blockchain();
     newChain.setBlockchainFromFile(receivedBlocks);
-    console.log(newChain);
     receivedBlocks = newChain.chain;
     /*** checking if empty ***/
     if (receivedBlocks.length === 0) {
@@ -115,7 +109,6 @@ function handleBlockchainResponse(receivedBlocks) {
 
     /*** validating structure ***/
     const latestBlockReceived = receivedBlocks[receivedBlocks.length-1];
-    console.log(latestBlockReceived);
     if (!latestBlockReceived.isValidBlockStructure()) {
         console.log("Invalid Block");
         return;
@@ -166,7 +159,6 @@ function initMessageHandler(ws) {
                 break;
             case message.MessageType.RESPONSE_BLOCKCHAIN:
                 const receivedBlocks = msg.data;
-                console.log(receivedBlocks);
                 if (receivedBlocks === null) {
                     console.log("Message Data: Invalid Blocks");
                     return;
@@ -188,7 +180,6 @@ function initMessageHandler(ws) {
 function parseMessage(data) {
     try {
         let testData = JSON.parse(data);
-        console.log(testData);
         return testData;
     } catch (e) {
         console.log(e);

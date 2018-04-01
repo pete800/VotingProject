@@ -38,13 +38,7 @@ class Blockchain {
     /**
      * Set blockchain
      */
-    setBlockchain(b) {
-        console.log(this.chain);
-        this.chain=b;
-        console.log(b);
-        var block = this.chain[0] instanceof Block;
-        console.log(block);
-    }
+
 
     setBlockchainFromFile(b) {
         this.chain =[];
@@ -55,7 +49,6 @@ class Blockchain {
         }
         if(this.isChainValid())
         {
-            console.log(this.chain);
             return;
         }
         else

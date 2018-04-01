@@ -98,8 +98,15 @@ function closeConn(ws) {
  * @param receivedBlocks
  */
 function handleBlockchainResponse(receivedBlocks) {
-
-    console.log('incoming chain: ' + receivedBlocks.toString());
+    if(receivedBlocks === 1)
+    {
+        console.log('one');
+    }
+    console.log(receivedBlocks);
+    let newChain = new blockchain.Blockchain();
+    newChain.setBlockchainFromFile(receivedBlocks);
+    console.log(newChain);
+    receivedBlocks = newChain.chain;
     /*** checking if empty ***/
     if (receivedBlocks.length === 0) {
         console.log("Blockchain is empty");
@@ -146,10 +153,8 @@ function initMessageHandler(ws) {
      * anonymous function, in which dara is the actual message
      */
     ws.on('message', (data) => {
-        const msg = parseMessage(data);
-        if (!msg instanceof message.Message) return;
-
-        console.log("Received Message" + JSON.stringify(msg));
+        let msg = parseMessage(data);
+        //if (!(msg instanceof message.Message)) return;
 
         /*** testing message type, to react properly ***/
         switch (msg.type) {
@@ -161,10 +166,12 @@ function initMessageHandler(ws) {
                 break;
             case message.MessageType.RESPONSE_BLOCKCHAIN:
                 const receivedBlocks = msg.data;
+                console.log(receivedBlocks);
                 if (receivedBlocks === null) {
                     console.log("Message Data: Invalid Blocks");
                     return;
                 }
+
                 handleBlockchainResponse(receivedBlocks);
                 break;
             default:
@@ -180,8 +187,11 @@ function initMessageHandler(ws) {
  */
 function parseMessage(data) {
     try {
-        return JSON.parse(data);
+        let testData = JSON.parse(data);
+        console.log(testData);
+        return testData;
     } catch (e) {
+        console.log(e);
         console.log("Error parsing message");
         return null;
     }

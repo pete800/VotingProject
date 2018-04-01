@@ -57,7 +57,7 @@ function responseBlockchainMessage() {
  */
 function responseLatestMessage() {
         return new Message(MessageType.RESPONSE_BLOCKCHAIN,
-            blockchain.blockchain.getLatestBlock());
+            blockchain.blockchain.getBlockchain());
 }
 
 

@@ -204,10 +204,10 @@ class Blockchain {
      */
 	replaceChain(newBlocks) {
         if (newBlocks.isChainValid() && newBlocks.chain.length > this.chain.length) {
-
+            console.log(this.chain);
             console.log('Replacing chain');
             this.chain = newBlocks;
-            //networking.broadcast(message.responseLatestMessage());
+            networking.broadcast(message.responseLatestMessage());
             file.writeBlockchainJSON();
         } else {
             console.log('Invalid chain received');

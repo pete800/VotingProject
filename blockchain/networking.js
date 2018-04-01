@@ -124,7 +124,7 @@ function handleBlockchainResponse(receivedBlocks) {
         }
     } else if (receivedBlocks.length === 1) {
         /*** query bc this shouldn't be ***/
-        broadcast(message.queryAllMessage());
+        //broadcast(message.queryAllMessage());
     } else if (!blockchain.blockchain.isChainEqual(newChain.chain)){
         /*** there's > 1 block, so take em all ***/
         blockchain.blockchain.replaceChain(newChain);
@@ -205,7 +205,6 @@ function sendMessage(who, message) {
  * send a message to all sockets
  */
 function broadcast(message) {
-    console.log(sockets);
     sockets.forEach(s => sendMessage(s, message));
 }
 

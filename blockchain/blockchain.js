@@ -172,7 +172,7 @@ class Blockchain {
                 return false;
             }
 
-            if (currentBlock.isValidBlockStructure()){
+            if (!currentBlock.isValidBlockStructure()){
                 console.log("Current block's structure is invalid");
                 return false;
             }

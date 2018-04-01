@@ -101,12 +101,13 @@ class Block {
      * @returns {boolean}
      */
 	isValidBlockStructure() {
+        console.log(
+            );
 
-		return typeof this.UserID === 'number' &&
-			typeof this.hash === 'string' &&
-			typeof this.previousHash === 'string' &&
-			typeof this.UserID === 'number' &&
-			typeof this.vote === 'number';
+		return typeof this.hash === 'string' &&
+        typeof this.previousHash === 'string' &&
+        typeof this.UserID === 'string' &&
+        typeof this.vote === 'string';
 	}
 
 }

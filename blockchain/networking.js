@@ -123,7 +123,7 @@ function handleBlockchainResponse(receivedBlocks) {
 
     const latestBlock = blockchain.blockchain.getLatestBlock();
     /*** is this a new block that agrees with previous chain ***/
-    if ( latestBlockReceived.getPHash() === latestBlock.getHash()) {
+    if ( latestBlockReceived.getPHash === latestBlock.getHash) {
         /*** if so, lets add it to chain ***/
         if (blockchain.blockchain.addBlock(latestBlockReceived)) {
             broadcast(message.responseLatestMessage());
@@ -133,7 +133,7 @@ function handleBlockchainResponse(receivedBlocks) {
         broadcast(message.queryAllMessage());
     } else {
         /*** there's > 1 block, so take em all ***/
-        this.replaceChain(receivedBlocks);
+        blockchain.blockchain.replaceChain(newChain);
     }
 }
 

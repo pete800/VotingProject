@@ -41,7 +41,8 @@ class Blockchain {
 
 
     setBlockchainFromFile(b) {
-        this.chain =[];
+        if(b.length > 0)
+            this.chain =[];
         for(let x=0; x < b.length; x++) {
             let block = new Block();
             block.duplicateBlock(b[x].previousHash, b[x].timestamp, b[x].index, b[x].UserID, b[x].vote,b[x].county, b[x].state,b[x].nonce, b[x].hash);

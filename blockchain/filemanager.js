@@ -27,6 +27,7 @@ function loadBlockchainJSON() {
             console.log(ex);
         }
     }, json => {
+
         console.log("Failed to load JSON:");
     });
 }

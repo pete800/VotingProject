@@ -37,8 +37,14 @@ class Blockchain {
      * Set blockchain
      */
     setBlockchain(b) {
-        for(x=0; x < b.length; x++) {
-            this.chain.push(b[x]);
+        for(var x=0; x < b.length; x++) {
+            this.generateNewBlock(b[x].UserID, b[x].vote, b[x].county, b[x].state);
+        }
+    }
+
+    setBlockchainFromFile(b) {
+        for(var x=1; x < b.length; x++) {
+            this.generateNewBlockFromFile(b[x].UserID, b[x].vote, b[x].county, b[x].state);
         }
     }
 
@@ -53,14 +59,24 @@ class Blockchain {
     }
 
 
+    generateNewBlockFromFile(UserID, vote, county, state) {
+
+        let prevBlock = this.getLatestBlock();    // used to get prev hash
+        let newBlock = new Block(Date.now(), prevBlock.index+1, UserID.toString(), vote, county, state, prevBlock.getHash);
+        this.addBlock(newBlock);
+        return newBlock;
+    }
+
     /**
      * generates next block in the chain
      */
     generateNewBlock(UserID, vote, county, state) {
+
         let prevBlock = this.getLatestBlock();    // used to get prev hash
         let newBlock = new Block(Date.now(), prevBlock.index+1, UserID.toString(), vote, county, state, prevBlock.getHash);
         this.addBlock(newBlock);
         networking.broadcast(message.responseLatestMessage());
+        file.writeBlockchainJSON();
         return newBlock;
     }
 
@@ -83,7 +99,6 @@ class Blockchain {
     addBlock(newBlock) {
         if (this.isValidNewBlock(newBlock)) {
             this.chain.push(newBlock);
-            //file.writeBlockchainJSON();
             return true;
         }
         return false;

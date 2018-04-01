@@ -21,10 +21,11 @@ function writeBlockchainJSON() {
  */
 function loadBlockchainJSON() {
     loadJsonFile(jsonFile).then( json => {
+        var newData = JSON.stringify(json);
         try{
-            blockchain.blockchain.setBlockchain(json);
-        }catch(Exception){
-            console.log(exception);
+            blockchain.blockchain.setBlockchainFromFile(json);
+        }catch(ex){
+            console.log(ex);
         }
     }, json => {
         console.log("Failed to load JSON:" + json);

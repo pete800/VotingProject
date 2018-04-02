@@ -15,6 +15,10 @@ CREATE TABLE Users(
 
 INSERT INTO Users(UserID, Fname,LName,SSN,Street,City,StateCode,County)
 VALUES("1","Peter","Del Col","112223333","200 Park Point Drive","Rochester","NY","Monroe");
+INSERT INTO Users(UserID, Fname,LName,SSN,Street,City,StateCode,County)
+VALUES("2","TestUser1","Smith","000112222","1 Lomb Memorial Drive","Rochester","NY","Monroe");
+INSERT INTO Users(UserID, Fname,LName,SSN,Street,City,StateCode,County)
+VALUES("3","TestUser2","Smith","111223333","47 Greenleaf Court","Rochester","NY","Monroe");
 
 CREATE TABLE Voted(
   UserID int PRIMARY KEY,
@@ -24,6 +28,8 @@ CREATE TABLE Voted(
 );
 
 INSERT INTO Voted VALUES("1","1","0");
+INSERT INTO Voted VALUES("2","1","0");
+INSERT INTO Voted VALUES("3","1","0");
 
 CREATE TABLE Parties(
   PartyID SMALLINT AUTO_INCREMENT PRIMARY KEY,
@@ -55,5 +61,5 @@ CREATE TABLE Candidates(
 );
 
 INSERT INTO Candidates VALUES("1","Donald","Trump","1","NY","NY","2018", "1");
-INSERT INTO Candidates VALUES("2","Hillary","Clinton","2","NY","Monroe","2018", "1");
+INSERT INTO Candidates VALUES("2","Hillary","Clinton","2","NY","Albany","2018", "1");
 

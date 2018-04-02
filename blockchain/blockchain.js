@@ -51,7 +51,7 @@ class Blockchain {
         }
         if(this.isChainValid())
         {
-            return;
+            file.writeBlockchainJSON();
         }
         else
         {
@@ -89,7 +89,7 @@ class Blockchain {
         newBlock.createBlock(Date.now(), prevBlock.index+1, UserID.toString(), vote, county, state, prevBlock.getHash);
         this.addBlock(newBlock);
 
-            networking.broadcast(message.responseLatestMessage());
+        networking.broadcast(message.responseLatestMessage());
         file.writeBlockchainJSON();
         return newBlock;
     }
@@ -120,7 +120,6 @@ class Blockchain {
 
 
 
-
     /**
      * returns whether new block is valid
      *
@@ -128,6 +127,8 @@ class Blockchain {
      * @returns {boolean}
      */
     isValidNewBlock(newBlock) {
+        if(this.getBlockForID(newBlock.UserID) !== -1)
+            return false;
         return newBlock.getPHash === this.getLatestBlock().getHash;
     }
 
@@ -179,6 +180,10 @@ class Blockchain {
                 console.log("Current block's structure is invalid");
                 return false;
             }
+        }
+        if(!this.checkDuplicateUsers())
+        {
+            return false;
         }
         return true;
     }
@@ -251,6 +256,22 @@ class Blockchain {
         }
         return -1;
     }
+
+    checkDuplicateUsers()
+    {
+        for(let x = 0; x < this.chain.length; x++)
+        {
+            for(let y = 0; y < this.chain.length; y++)
+            {
+                if(this.chain[x].UserID === this.chain[y].UserID) {
+                    console.log('Duplicate UserID found on chain!');
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     getBlockAtIndex(index){
         try{

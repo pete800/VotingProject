@@ -18,10 +18,7 @@ To run this project on a local machine:
 TODO:
 -
 
-	* Finish writing trackblock(Friday)
-	* write block file io so we dont lose the data(Friday)
 	* create more test data(Saturday)
-	* get networking up and running(Saturday)
 	* Write user verification and checking(Saturday)
 	* test security and bugs(Sunday)
 

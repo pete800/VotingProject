@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
                 if(error) throw error;
                 if(results2[0].Year2018 === 1)
                 {
-                    res.redirect('/voted');
+                    res.redirect('/voted', {UserID: req.session.user});
                 }else{
                     res.render('votingbooth', {candidates: results});
                 }
@@ -36,7 +36,8 @@ router.post('/vote', function(req, res){
             + results[0].StateCode + results[0].County);
         blockchain.blockchain.generateNewBlock(hash, vote, results[0].County, results[0].StateCode);
     });
-    //db.query('UPDATE voted SET Year2018=1 WHERE UserID='+db.escape(req.session.user), function(error, results, field){});
+
+    db.query('UPDATE voted SET Year2018=1 WHERE UserID='+db.escape(req.session.user), function(error, results, field){});
     blockchain.blockchain.isChainValid();
     console.log(blockchain.blockchain.printChain());
     req.session.reset();

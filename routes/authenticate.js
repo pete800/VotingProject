@@ -25,8 +25,13 @@ router.post('/add', function(req, res){
         }else{
             //Authentication Unsuccessful
             req.session.reset();
+            res.redirect('notfound/')
         }
     });
+});
+
+router.get('/notfound', function(req, res){
+    res.render('notfound');
 });
 
 function serialize(data)

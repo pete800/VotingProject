@@ -121,6 +121,8 @@ function handleBlockchainResponse(receivedBlocks) {
         /*** if so, lets add it to chain ***/
         if (blockchain.blockchain.addBlock(latestBlockReceived)) {
             broadcast(message.responseLatestMessage());
+            console.log('added block');
+            console.log(blockchain.blockchain.chain);
         }
     } else if (receivedBlocks.length === 1) {
         /*** query bc this shouldn't be ***/

@@ -88,7 +88,8 @@ class Blockchain {
         let newBlock = new Block();
         newBlock.createBlock(Date.now(), prevBlock.index+1, UserID.toString(), vote, county, state, prevBlock.getHash);
         this.addBlock(newBlock);
-        networking.broadcast(message.responseLatestMessage());
+
+            networking.broadcast(message.responseLatestMessage());
         file.writeBlockchainJSON();
         return newBlock;
     }
@@ -183,7 +184,7 @@ class Blockchain {
     }
 
     isChainEqual(chain){
-        if(this.chain.length === chain.length){
+        if(this.chain.length !== chain.length){
             return false;
         }
         for(let x = 0; x < chain.length; x++)
@@ -204,11 +205,11 @@ class Blockchain {
      */
 	replaceChain(newBlocks) {
         if (newBlocks.isChainValid() && newBlocks.chain.length > this.chain.length) {
-            console.log(this.chain);
             console.log('Replacing chain');
-            this.chain = newBlocks;
+            this.chain = newBlocks.chain;
             networking.broadcast(message.responseLatestMessage());
             file.writeBlockchainJSON();
+            console.log(this.chain);
         } else {
             console.log('Invalid chain received');
         }

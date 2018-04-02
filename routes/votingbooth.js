@@ -4,8 +4,6 @@ var SHA256 = require("crypto-js/sha256");
 var blockchain = require('../blockchain/blockchain');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    //TODO check server time. If time not allowed reroute to an error page
-
     if(req.session && req.session.user) {
         var data = null;
         var year = '2018';
@@ -15,7 +13,7 @@ router.get('/', function(req, res, next) {
                 if(error) throw error;
                 if(results2[0].Year2018 === 1)
                 {
-                    res.redirect('/voted', {UserID: req.session.user});
+                    res.redirect('/voted');
                 }else{
                     res.render('votingbooth', {candidates: results});
                 }
@@ -30,9 +28,10 @@ router.get('/', function(req, res, next) {
 
 router.post('/vote', function(req, res){
     var vote = req.body.pres;
+    var hash;
     db.query('SELECT * FROM Users WHERE UserID='+db.escape(req.session.user)+';', function(error, results, field){
         if(error) throw error;
-        var hash = SHA256(results[0].UserID + results[0].FName + results[0].LName + results[0].SSH + results[0].Street + results[0].City
+        hash = SHA256(results[0].UserID + results[0].FName + results[0].LName + results[0].SSH + results[0].Street + results[0].City
             + results[0].StateCode + results[0].County);
         blockchain.blockchain.generateNewBlock(hash, vote, results[0].County, results[0].StateCode);
     });
@@ -41,7 +40,7 @@ router.post('/vote', function(req, res){
     blockchain.blockchain.isChainValid();
     console.log(blockchain.blockchain.printChain());
     req.session.reset();
-    res.redirect('/processing');
+    res.redirect('/processing', {UserID, hash});
 });
 
 

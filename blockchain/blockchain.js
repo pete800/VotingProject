@@ -263,7 +263,7 @@ class Blockchain {
         {
             for(let y = 0; y < this.chain.length; y++)
             {
-                if(this.chain[x].UserID === this.chain[y].UserID) {
+                if(this.chain[x].UserID === this.chain[y].UserID && x !== y) {
                     console.log('Duplicate UserID found on chain!');
                     return false;
                 }

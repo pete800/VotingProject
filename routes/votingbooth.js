@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/vote', function(req, res){
     var vote = req.body.pres;
-    var hash;
+    var hash = '';
     db.query('SELECT * FROM Users WHERE UserID='+db.escape(req.session.user)+';', function(error, results, field){
         if(error) throw error;
         hash = SHA256(results[0].UserID + results[0].FName + results[0].LName + results[0].SSH + results[0].Street + results[0].City
@@ -38,9 +38,9 @@ router.post('/vote', function(req, res){
 
     db.query('UPDATE voted SET Year2018=1 WHERE UserID='+db.escape(req.session.user), function(error, results, field){});
     blockchain.blockchain.isChainValid();
-    console.log(blockchain.blockchain.printChain());
     req.session.reset();
-    res.redirect('/processing', {UserID, hash});
+    req.session.hash = hash;
+    res.redirect('/processing');
 });
 
 

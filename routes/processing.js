@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    res.render('processing');
+    var hash = req.session.hash;
+    req.session.reset();
+    res.render('processing',{UserID: req.session.hash});
 });
 
 module.exports = router;

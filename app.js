@@ -39,7 +39,10 @@ app.use(session({
     secret: '3fSSgXgevb60GGE8jGGCJ8OzNWZ76Nc2CybzMzSLH8h1xHo3CXTybWSZFwik4bj6wyMZ5wEAN4ArjopU2FmO1KTtbgdYqmsv6GVk',
     duration: 5 * 60 * 1000,
     activeDuration: 5 * 60 * 1000,
+    secure: false,
+    path:'/'
 }));
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 

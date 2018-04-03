@@ -28,19 +28,21 @@ router.get('/', function(req, res, next) {
 
 router.post('/vote', function(req, res){
     var vote = req.body.pres;
-    var hash = '';
+    var hash;
     db.query('SELECT * FROM Users WHERE UserID='+db.escape(req.session.user)+';', function(error, results, field){
         if(error) throw error;
         hash = SHA256(results[0].UserID + results[0].FName + results[0].LName + results[0].SSH + results[0].Street + results[0].City
             + results[0].StateCode + results[0].County);
+        req.session.hash = hash.toString();
+        console.log(req.session);
         blockchain.blockchain.generateNewBlock(hash, vote, results[0].County, results[0].StateCode);
+        db.query('UPDATE voted SET Year2018=1 WHERE UserID='+db.escape(req.session.user), function(error, results, field){});
+        //req.session.save();
+        console.log(req.session.hash);
+        blockchain.blockchain.isChainValid();
+        res.redirect('/processing/');
     });
 
-    db.query('UPDATE voted SET Year2018=1 WHERE UserID='+db.escape(req.session.user), function(error, results, field){});
-    blockchain.blockchain.isChainValid();
-    req.session.reset();
-    req.session.hash = hash;
-    res.redirect('/processing');
 });
 
 

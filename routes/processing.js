@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res) {
     var hash = req.session.hash;
     req.session.reset();
-    res.render('processing',{UserID: req.session.hash});
+    res.render('processing', {UserID: hash});
 });
 
 module.exports = router;

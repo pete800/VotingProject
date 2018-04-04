@@ -15,14 +15,8 @@ To run this project on a local machine:
 7. Then add the data by running \. PATHTOFILE\database_setup.sql
 7. back in the command line run npm start
 
-TODO:
--
 
-	* create more test data(Saturday)
-	* Write user verification and checking(Saturday)
-	* test security and bugs(Sunday)
-
-
+Change connections.js if you would like to have the program connect to a different server
 
 
 Blockchain Process:
@@ -41,3 +35,5 @@ One server per time zone. Voting opens at 8 am and closes at 5 pm in each time z
 10. Update chain with recently mined blocks
 11. Notify other nodes that the chain has been modified
 12. Notify user if their block has been mined that their vote has been counted and give receipt id
+
+You can contact us if you have any questions

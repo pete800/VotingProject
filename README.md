@@ -15,6 +15,7 @@ To run this project on a local machine:
 7. Then add the data by running \. PATHTOFILE\database_setup.sql
 7. back in the command line run npm start
 
+
 Change connections.js if you would like to have the program connect to a different server
 
 

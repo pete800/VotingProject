@@ -1,0 +1,18 @@
+Group 4 investigation of Group 5
+
+Group 5s program is a secure election voting system. Our initial investigation led us to look at the basic security issues
+that most websites face such as sql injection and other minor attacks which the website seems to handle well.
+
+The next part of our investigation led us to design choices and implementation which is where we did find an issue
+with the design of the project. One of the issues we ran across was that the implementation of the voting system allowed
+anyone to sign up and register. Based on the way the registration system and voting system works, anyone can write
+a simple application that dumps in random values for the registration and grabs the public/private key. It can then be
+programmed to vote automatically as well. Now normally this would just be design choices or the difference between production
+and user testing but in our opinion the program is compromised if anyone is allowed to register and vote with no restrictions.
+
+Another item of note is that you guys are pulling the bootstrap CSS and JS from their CDN. While this is probably not going to
+be an issue there was a point in the past where the CDN was compromised and was sending injected code to clients. For
+this reason it is a recommendation to be prudent and to download the required libraries in case a breach does occur again.
+Because of the reach of the bootstrap CDN it makes a very good target for hackers.
+https://www.maxcdn.com/blog/bootstrapcdn-security-post-mortem/
+

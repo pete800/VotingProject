@@ -4,7 +4,6 @@ A website developed to provide a safe secure way to vote in the elections
 Utilizes blockchain technology
 
 # How to Run:
-There should already be a master instance of this project running at vote.delcol.io
 To run this project on a local machine: 
 1. Download Node and install.
 2. Download this code and navigate a command prompt to the main directory

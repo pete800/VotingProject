@@ -54,7 +54,7 @@
     "uuid": "3.0.1",
     "validator": "7.0.0",
     "write-json-file": "^2.3.0",
-    "ws": "^5.1.0"
+    "ws": "^7.4.6"
   },
   "devDependencies": {
     "autoprefixer": "6.7.7",
